@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<a href="#pameran" class="hover:text-amber-700 transition">Galeri</a>
+<a href="{{ route('galeri')}}" class="hover:text-amber-700 transition">Galeri</a>
 <a href="{{ route('berita') }}" class="hover:text-amber-700 transition">Berita</a>
                 <a href="{{ route('kegiatan') }}" class=" hover:text-amber-700 transition">Kegiatan</a>
 
@@ -100,30 +100,43 @@
     </div>
 </header>
 
-    <!-- 2. BAGIAN HERO (UTAMA) -->
-    <section class="relative isolate overflow-hidden pt-20 pb-24 flex items-center min-h-[80vh] border-b border-amber-200">
+<!-- 1. Pastikan CDN CSS AOS Tertulis dengan Benar -->
+<link rel="stylesheet"
+      href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+
+<main class="bg-[#fdfbf2]">
+
+    <!-- 2. BAGIAN HERO (Menggunakan Efek Fade Up Keseluruhan) -->
+    <section data-aos="fade-up" data-aos-duration="1000" class="relative isolate overflow-hidden pt-20 pb-24 flex items-center min-h-[80vh] border-b border-amber-200">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-3xl text-center">
-                <span class="inline-flex items-center rounded-full bg-amber-600/10 px-4 py-1.5 text-xs font-medium text-amber-800 ring-1 ring-inset ring-amber-600/20 mb-6">Sistem Profil Museum V1.0</span>
-                <h1 class="text-5xl font-extrabold tracking-tight text-stone-900 sm:text-7xl">
+                <!-- Elemen di dalam menggunakan delay agar muncul berurutan (Staggered) -->
+                <span data-aos="fade-down" data-aos-duration="800" data-aos-delay="200" class="inline-flex items-center rounded-full bg-amber-600/10 px-4 py-1.5 text-xs font-medium text-amber-800 ring-1 ring-inset ring-amber-600/20 mb-6">
+                    Sistem Profil Museum V1.0
+                </span>
+
+                <h1 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" class="text-4xl md:text-6xl font-black tracking-tight text-stone-900 sm:text-7xl leading-[1.15]">
                     Melestarikan Sejarah Lewat <span class="text-amber-700">Arsip Digital</span>
                 </h1>
-                <p class="mt-8 text-lg font-normal text-stone-600 sm:text-xl/8">
+
+                <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600" class="mt-8 text-lg font-normal text-stone-600 sm:text-xl/8">
                     Selamat datang di konsep portal digital museum kami. Antarmuka ini menghubungkan keindahan tata letak galeri sejarah dengan sistem manajemen data yang modern dan aman.
                 </p>
-                <div class="mt-10 flex items-center justify-center gap-x-6">
-                    <a href="#pameran" class="rounded-lg bg-amber-700 px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-amber-600 transition">Jelajahi Galeri</a>
+
+                <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800" class="mt-10 flex items-center justify-center gap-x-6">
+                    <a href="#pameran" class="rounded-lg bg-amber-700 px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-amber-600 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">Jelajahi Galeri</a>
                     <a href="#tentang" class="text-base font-semibold text-stone-700 hover:text-amber-700 transition">Latar Belakang Instansi <span aria-hidden="true">→</span></a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 3. BAGIAN TENTANG (PROFIL INSTANSI) -->
-    <section id="tentang" class="py-24 border-b border-amber-200 bg-amber-100/50">
+    <!-- 3. BAGIAN TENTANG (Menggunakan Efek Zoom In saat di-scroll) -->
+    <section id="tentang" data-aos="zoom-in-up" data-aos-duration="1000" class="py-24 border-b border-amber-200 bg-amber-100/30 overflow-hidden">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center">
-                <div>
+                <!-- Konten teks bergeser sedikit -->
+                <div data-aos="fade-right" data-aos-duration="800" data-aos-delay="300">
                     <h2 class="text-base font-semibold text-amber-700 tracking-wide uppercase">Sejarah Yayasan</h2>
                     <p class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">Tentang Lembaga Kami</p>
                     <p class="mt-6 text-base text-stone-600 leading-7">
@@ -133,41 +146,61 @@
                         Portal web ini berfungsi sebagai wadah visual untuk menyajikan koleksi pameran kepada publik, sekaligus memudahkan petugas admin yang sah untuk memperbarui data katalog secara langsung.
                     </p>
                 </div>
-                <!-- TEMPAT GAMBAR MOCKUP -->
-                <div class="bg-amber-100 border border-amber-200 rounded-2xl h-80 flex items-center justify-center text-amber-800/60 italic shadow-sm">
+                <!-- Gambar/Mockup masuk dari kanan -->
+                <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="500" class="bg-amber-100 border border-amber-200 rounded-2xl h-80 flex items-center justify-center text-amber-800/60 italic shadow-sm hover:shadow-md transition-shadow duration-300">
                     [ Area Foto: Fasilitas Museum / Gedung Utama ]
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4. BAGIAN KOLEKSI PAMERAN -->
-    <section id="pameran" class="py-24 border-b border-amber-200">
+    <!-- 4. BAGIAN KOLEKSI PAMERAN (Menggunakan Efek Slide Up) -->
+    <section id="pameran" data-aos="slide-up" data-aos-duration="1000" class="py-24 border-b border-amber-200">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl text-center mb-16">
+            <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" class="mx-auto max-w-2xl text-center mb-16">
                 <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">Koleksi Unggulan</h2>
                 <p class="mt-4 text-stone-600">Berikut adalah beberapa kategori galeri utama yang saat ini dikelola di dalam sistem basis data kami.</p>
             </div>
 
-            <!-- KARTU KOLEKSI (GRID MATRIKS) -->
+            <!-- Grid Kartu dengan efek transisi bergantian -->
             <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                <!-- KARTU 1 -->
-                <div class="bg-white border border-amber-200 rounded-xl overflow-hidden p-6 hover:border-amber-500/50 transition duration-300 shadow-sm hover:shadow-md">
+                <div data-aos="fade-up" data-aos-duration="600" data-aos-delay="400" class="bg-white border border-amber-200 rounded-xl overflow-hidden p-6 hover:border-amber-500/50 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 transform">
                     <div class="bg-amber-50 rounded-lg h-44 mb-6 flex items-center justify-center text-amber-800/40">Pratinjau Gambar</div>
                     <h3 class="text-xl font-bold text-stone-900">Era Artefak Kuno</h3>
                     <p class="mt-3 text-sm text-stone-600 leading-6">Kumpulan katalog arkeologi fisik bersejarah yang disimpan dengan aman di dalam ruang penyimpanan sayap barat.</p>
                 </div>
-                <!-- KARTU 2 -->
-                <div class="bg-white border border-amber-200 rounded-xl overflow-hidden p-6 hover:border-amber-500/50 transition duration-300 shadow-sm hover:shadow-md">
+
+                <div data-aos="fade-up" data-aos-duration="600" data-aos-delay="550" class="bg-white border border-amber-200 rounded-xl overflow-hidden p-6 hover:border-amber-500/50 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 transform">
                     <div class="bg-amber-50 rounded-lg h-44 mb-6 flex items-center justify-center text-amber-800/40">Pratinjau Gambar</div>
                     <h3 class="text-xl font-bold text-stone-900">Dokumen Kerangka Pendirian</h3>
                     <p class="mt-3 text-sm text-stone-600 leading-6">Log arsip piagam asli lembaga, cetak biru bangunan lama, dan rekaman media sejarah pendiri awal.</p>
                 </div>
-                <!-- KARTU 3 -->
-                <div class="bg-white border border-amber-200 rounded-xl overflow-hidden p-6 hover:border-amber-500/50 transition duration-300 shadow-sm hover:shadow-md">
+
+                <div data-aos="fade-up" data-aos-duration="600" data-aos-delay="700" class="bg-white border border-amber-200 rounded-xl overflow-hidden p-6 hover:border-amber-500/50 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 transform">
                     <div class="bg-amber-50 rounded-lg h-44 mb-6 flex items-center justify-center text-amber-800/40">Pratinjau Gambar</div>
                     <h3 class="text-xl font-bold text-stone-900">Galeri Seni Visual</h3>
-                </section>
+                    <p class="mt-3 text-sm text-stone-600 leading-6">Dokumentasi digital karya seni rupa, lukisan klasik, dan potret peninggalan budaya wilayah Talaga.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- 5. Script Pengaktif Animasi di Akhir Halaman -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    AOS.init({
+        once: true,
+        offset: 160,
+        duration: 1000,
+        easing: 'ease-out-cubic'
+    });
+});
+</script>
+
 
                 <!-- 3. KAKI HALAMAN (FOOTER) RESPONSIF -->
 <!-- Menambahkan w-full dan overflow-hidden untuk mencegah kebocoran layar kanan -->
@@ -207,7 +240,9 @@
 
     </div>
 </footer>
+
 </body>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

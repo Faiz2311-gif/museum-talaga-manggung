@@ -87,44 +87,66 @@
     </header>
 
     <!-- 2. KONTEN UTAMA: GALERI (Gaya Google Images) -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-10">
+    <!-- PERBAIKAN: Mengubah background utama menjadi warna krem hangat (#fdfbf2) -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 bg-[#fdfbf2]">
 
-        <!-- Bagian Judul dan Deskripsi -->
-        <div class="text-center max-w-2xl mx-auto mb-10">
-            <h1 class="text-3xl font-bold tracking-tight text-stone-800 sm:text-4xl">Galeri Sejarah</h1>
-            <p class="mt-3 text-sm text-stone-500">Arsip visual artefak, dokumentasi sejarah, dan runtunan kegiatan pelestarian budaya Museum Talaga Manggung.</p>
-        </div>
+    <!-- Bagian Judul dan Deskripsi -->
+    <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
+        <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-medium px-4 py-1.5 rounded-full mb-6 font-sans">
+            Arsip & Dokumentasi Visual
+        </span>
+        <h1 class="text-4xl md:text-5xl font-black text-amber-700 tracking-tight leading-[1.15] mb-4">
+            Galeri Sejarah Museum
+        </h1>
+        <p class="font-sans text-sm text-stone-600 leading-relaxed max-w-xl">
+            Jajahi kumpulan arsip visual artefak, dokumentasi sejarah, dan runtunan kegiatan pelestarian budaya di Museum Talaga Manggung.
+        </p>
+    </div>
 
-        <!-- Bilah Filter Kategori (Gaya Pil Menu Google) -->
-        <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-8 scrollbar-none whitespace-nowrap">
-            <button class="px-4 py-2 text-xs font-medium rounded-full bg-amber-600 text-white shadow-sm hover:bg-amber-700 transition">Semua Foto</button>
-            <button class="px-4 py-2 text-xs font-medium rounded-full bg-white text-stone-600 border border-amber-200 hover:bg-amber-50 transition">Artefak Kerajaan</button>
-            <button class="px-4 py-2 text-xs font-medium rounded-full bg-white text-stone-600 border border-amber-200 hover:bg-amber-50 transition">Naskah Kuno</button>
-            <button class="px-4 py-2 text-xs font-medium rounded-full bg-white text-stone-600 border border-amber-200 hover:bg-amber-50 transition">Upacara Adat</button>
-            <button class="px-4 py-2 text-xs font-medium rounded-full bg-white text-stone-600 border border-amber-200 hover:bg-amber-50 transition">Dokumentasi Kegiatan</button>
-        </div>
+    <!-- Bilah Filter Kategori -->
+    <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-10 scrollbar-none whitespace-nowrap">
+        <button class="px-5 py-2 text-sm font-medium rounded-full bg-amber-600 text-white shadow-md shadow-amber-600/10 hover:bg-amber-700 hover:shadow-lg transition-all duration-200">Semua Foto</button>
+        <button class="px-5 py-2 text-sm font-medium rounded-full bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30 transition-all duration-200">Artefak Kerajaan</button>
+        <button class="px-5 py-2 text-sm font-medium rounded-full bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30 transition-all duration-200">Naskah Kuno</button>
+        <button class="px-5 py-2 text-sm font-medium rounded-full bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30 transition-all duration-200">Upacara Adat</button>
+        <button class="px-5 py-2 text-sm font-medium rounded-full bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30 transition-all duration-200">Dokumentasi Kegiatan</button>
+    </div>
 
-        <!-- Grid Foto Google Images (Menggunakan ukuran grid bervariasi / Masonry-like layout) -->
-        <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+    <!-- Grid Foto (Kiri ke Kanan, Responsif) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-            <!-- Item Foto 1 -->
-            <div class="break-inside-avoid relative group bg-white border border-amber-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <img src="https://unsplash.com" alt="Artefak" class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300">
-                <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <p class="text-xs font-semibold text-amber-300 uppercase tracking-wider">Artefak Kerajaan</p>
-                    <h3 class="text-sm font-bold text-white mt-1">Keris Pusaka Talaga</h3>
+        <!-- Item Foto 1 -->
+        <div class="flex flex-col relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
+            <div class="overflow-hidden aspect-[4/3] bg-stone-100">
+                <!-- Jangan lupa mengganti tautan src di bawah dengan URL gambar asli Anda -->
+                <img src="https://unsplash.com" alt="Keris Pusaka Talaga" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
+            </div>
+            <div class="p-4 bg-white flex-grow flex flex-col justify-between">
+                <div>
+                    <p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">Artefak Kerajaan</p>
+                    <h3 class="text-sm font-semibold text-stone-800 mt-1 group-hover:text-amber-600 transition-colors">Keris Pusaka Talaga</h3>
                 </div>
             </div>
+        </div>
 
-            <!-- Item Foto 2 (Lebih Tinggi untuk Efek Google Images/Pinterest) -->
-            <div class="break-inside-avoid relative group bg-white border border-amber-200 rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer">
-                <img src="https://unsplash.com" alt="Naskah" class="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300">
-                <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <p class="text-xs font-semibold text-amber-300 uppercase tracking-wider">Naskah Kuno</p>
-                    <h3 class="text-sm font-bold text-white mt-1">Prasasti & Piagam Daun Lontar</h3>
+        <!-- Item Foto 2 -->
+        <div class="flex flex-col relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
+            <div class="overflow-hidden aspect-[4/3] bg-stone-100">
+                <!-- Jangan lupa mengganti tautan src di bawah dengan URL gambar asli Anda -->
+                <img src="https://unsplash.com" alt="Prasasti & Piagam" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
+            </div>
+            <div class="p-4 bg-white flex-grow flex flex-col justify-between">
+                <div>
+                    <p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">Naskah Kuno</p>
+                    <h3 class="text-sm font-semibold text-stone-800 mt-1 group-hover:text-amber-600 transition-colors">Prasasti & Piagam Daun Lontar</h3>
                 </div>
             </div>
-        </main>
+        </div>
+
+    </div>
+</main>
+
+
 
             <!-- Item Foto 3 -->
 <footer class="bg-[#1c1917] text-stone-400 text-xs py-12 border-t border-stone-800 font-sans mt-auto w-full overflow-hidden">

@@ -27,30 +27,29 @@
             <nav class="hidden md:flex items-center space-x-6 text-xs md:text-sm font-medium text-stone-600 whitespace-nowrap ml-auto">
                 <a href="{{ url('/') }}" class="hover:text-amber-700 transition">Beranda</a>
 
-                <!-- Dropdown Profil -->
-                <div class="relative group">
-                    <button class="flex items-center hover:text-amber-700 transition gap-1 focus:outline-none">
+                <!-- Dropdown Profil (Sudah Interaktif Klik) -->
+                <div class="relative inline-block text-left">
+                    <button onclick="toggleDropdown(event, 'menuProfil')" class="flex items-center hover:text-amber-700 transition gap-1 focus:outline-none">
                         Profil <span class="text-[9px]">▼</span>
                     </button>
-                    <div class="absolute left-0 mt-2 w-48 bg-white border border-amber-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden text-left">
+                    <div id="menuProfil" class="absolute left-0 mt-2 w-48 bg-white border border-amber-200 rounded-lg shadow-xl opacity-0 invisible -translate-y-2 transform transition-all duration-300 ease-out z-50 overflow-hidden text-left dropdown-list">
                         <a href="{{ url('/#sejarah') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">Sejarah</a>
                         <a href="{{ url('/#visi-misi') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">Visi & Misi</a>
                         <a href="{{ url('/#struktur') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800">Struktur Organisasi</a>
                     </div>
                 </div>
 
-                <a href="{{ route('galeri') }}" class="hover:text-amber-700 transition">Galeri</a>
-                <a href="{{ route('berita') }}" class="hover:text-amber-700 transition">Berita</a>
-
-                <!-- MENU AKTIF: Kegiatan berwarna amber -->
+                <!-- MENU AKTIF: Galeri berwarna amber -->
+                <a href="{{ route('galeri') }}" class=" hover:text-amber-700 transition">Galeri</a>
+                <a href="{{ route('berita') }}" class=" hover:text-amber-700 transition">Berita</a>
                 <a href="{{ route('kegiatan') }}" class="text-amber-500 hover:text-amber-700 transition">Kegiatan</a>
 
-                <!-- Dropdown Living Museum -->
-                <div class="relative group">
-                    <button class="flex items-center hover:text-amber-700 transition gap-1 focus:outline-none">
+                <!-- Dropdown Living Museum (Sudah Interaktif Klik) -->
+                <div class="relative inline-block text-left">
+                    <button onclick="toggleDropdown(event, 'menuMuseum')" class="flex items-center hover:text-amber-700 transition gap-1 focus:outline-none">
                         Living Museum <span class="text-[9px]">▼</span>
                     </button>
-                    <div class="absolute left-0 mt-2 w-44 bg-white border border-amber-200 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 overflow-hidden text-left">
+                    <div id="menuMuseum" class="absolute left-0 mt-2 w-44 bg-white border border-amber-200 rounded-lg shadow-xl opacity-0 invisible -translate-y-2 transform transition-all duration-300 ease-out z-50 overflow-hidden text-left dropdown-list">
                         <a href="#" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">Walang Suji</a>
                         <a href="#" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800">Gosali</a>
                     </div>
@@ -76,12 +75,9 @@
                 <a href="{{ url('/#visi-misi') }}" class="block hover:text-amber-700 text-xs transition">Visi & Misi</a>
                 <a href="{{ url('/#struktur') }}" class="block hover:text-amber-700 text-xs transition">Struktur Organisasi</a>
             </div>
-            <a href="{{ route('galeri') }}#pameran" class="block hover:text-amber-700 py-1 transition">Galeri</a>
-            <a href="{{ route('berita') }}" class="block hover:text-amber-700 py-1 transition">Berita</a>
-
-            <!-- MENU AKTIF SELULER -->
+            <a href="{{ route('galeri') }}" class="block hover:text-amber-700 py-1 transition">Galeri</a>
+            <a href="{{ route('berita') }}" class="block   hover:text-amber-700 py-1 transition">Berita</a>
             <a href="{{ route('kegiatan') }}" class="block text-amber-500 hover:text-amber-700 py-1 transition">Kegiatan</a>
-
             <div class="border-l-2 border-amber-200 pl-3 space-y-2 my-1">
                 <span class="text-xs text-stone-400 uppercase tracking-wider block">Living Museum</span>
                 <a href="#" class="block hover:text-amber-700 text-xs transition">Walang Suji</a>
