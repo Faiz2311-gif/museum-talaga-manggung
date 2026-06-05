@@ -15,6 +15,17 @@ Route::get('/kegiatan', [HalamanController::class, 'kegiatan'])->name('kegiatan'
 // Route untuk halaman galeri
 Route::get('/galeri', [HalamanController::class, 'galeri'])->name('galeri');
 
+Route::get('/sejarah', [HalamanController::class, 'sejarah'])->name('sejarah');
+
+Route::get('/visimisi', [HalamanController::class, 'visimisi'])->name('visimisi');
+
+Route::get('/strukturorg', [HalamanController::class, 'strukturorg'])->name('strukturorg');
+
+Route::get('/walangsuji', [HalamanController::class, 'walangsuji'])->name('walangsuji');
+
+Route::get('/gosali', [HalamanController::class, 'gosali'])->name('gosali');
+
+
 // Grup Route Admin (Otomatis menggunakan awalan url /admin)
 Route::prefix('admin')->middleware(['auth'])->group(function () {
 

@@ -20,4 +20,29 @@ class HalamanController extends Controller
     {
         return view('galeri'); // Mengarah ke views/galeri.blade.php
     }
+
+    public function sejarah()
+    {
+        return view('sejarah');
+    }
+
+    public function visimisi()
+    {
+        return view('visimisi');
+    }
+
+    public function strukturorg()
+    {
+        return view('strukturorg');
+    }
+
+    public function walangsuji()
+    {
+        return view('walangsuji');
+    }
+
+    public function gosali()
+    {
+        return view('gosali');
+    }
 }

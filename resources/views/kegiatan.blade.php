@@ -33,9 +33,9 @@
                         Profil <span class="text-[9px]">▼</span>
                     </button>
                     <div id="menuProfil" class="absolute left-0 mt-2 w-48 bg-white border border-amber-200 rounded-lg shadow-xl opacity-0 invisible -translate-y-2 transform transition-all duration-300 ease-out z-50 overflow-hidden text-left dropdown-list">
-                        <a href="{{ url('/#sejarah') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">Sejarah</a>
-                        <a href="{{ url('/#visi-misi') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">Visi & Misi</a>
-                        <a href="{{ url('/#struktur') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800">Struktur Organisasi</a>
+                        <a href="{{ route('sejarah') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">Sejarah</a>
+                        <a href="{{ route('visimisi') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">Visi & Misi</a>
+                        <a href="{{ route('strukturorg') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800">Struktur Organisasi</a>
                     </div>
                 </div>
 
@@ -50,8 +50,8 @@
                         Living Museum <span class="text-[9px]">▼</span>
                     </button>
                     <div id="menuMuseum" class="absolute left-0 mt-2 w-44 bg-white border border-amber-200 rounded-lg shadow-xl opacity-0 invisible -translate-y-2 transform transition-all duration-300 ease-out z-50 overflow-hidden text-left dropdown-list">
-                        <a href="#" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">Walang Suji</a>
-                        <a href="#" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800">Gosali</a>
+                        <a href="{{ route('walangsuji') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800 border-b border-amber-100">Walang Suji</a>
+                        <a href="{{ route('gosali') }}" class="block px-4 py-2.5 text-xs text-stone-700 hover:bg-amber-50 hover:text-amber-800">Gosali</a>
                     </div>
                 </div>
             </nav>
@@ -71,17 +71,17 @@
             <a href="{{ url('/') }}" class="block hover:text-amber-700 py-1 transition">Beranda</a>
             <div class="border-l-2 border-amber-200 pl-3 space-y-2 my-1">
                 <span class="text-xs text-stone-400 uppercase tracking-wider block">Profil</span>
-                <a href="{{ url('/#sejarah') }}" class="block hover:text-amber-700 text-xs transition">Sejarah</a>
-                <a href="{{ url('/#visi-misi') }}" class="block hover:text-amber-700 text-xs transition">Visi & Misi</a>
-                <a href="{{ url('/#struktur') }}" class="block hover:text-amber-700 text-xs transition">Struktur Organisasi</a>
+                <a href="{{ route('sejarah') }}" class="block hover:text-amber-700 text-xs transition">Sejarah</a>
+                <a href="{{ route('visimisi') }}" class="block hover:text-amber-700 text-xs transition">Visi & Misi</a>
+                <a href="{{ route('strukturorg') }}" class="block hover:text-amber-700 text-xs transition">Struktur Organisasi</a>
             </div>
             <a href="{{ route('galeri') }}" class="block hover:text-amber-700 py-1 transition">Galeri</a>
             <a href="{{ route('berita') }}" class="block   hover:text-amber-700 py-1 transition">Berita</a>
             <a href="{{ route('kegiatan') }}" class="block text-amber-500 hover:text-amber-700 py-1 transition">Kegiatan</a>
             <div class="border-l-2 border-amber-200 pl-3 space-y-2 my-1">
                 <span class="text-xs text-stone-400 uppercase tracking-wider block">Living Museum</span>
-                <a href="#" class="block hover:text-amber-700 text-xs transition">Walang Suji</a>
-                <a href="#" class="block hover:text-amber-700 text-xs transition">Gosali</a>
+                <a href="{{route('walangsuji')}}" class="block hover:text-amber-700 text-xs transition">Walang Suji</a>
+                <a href="{{route('gosali')}}" class="block hover:text-amber-700 text-xs transition">Gosali</a>
             </div>
         </div>
     </header>
