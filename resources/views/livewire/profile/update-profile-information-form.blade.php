@@ -48,53 +48,71 @@ $sendVerification = function () {
 
 ?>
 
-<section>
+<section class="font-sans">
     <header>
-        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Profile Information') }}
+        <!-- Judul menggunakan warna batu gelap yang kuat -->
+        <h2 class="text-lg font-bold text-stone-900">
+            {{ __('Informasi Profil Operator') }}
         </h2>
 
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+        <!-- Deskripsi menggunakan warna teks stone-500 yang lembut -->
+        <p class="mt-2 text-sm text-stone-500 leading-relaxed">
+            {{ __("Perbarui informasi identitas profil dan alamat email resmi akun operator Anda di sini.") }}
         </p>
     </header>
 
-    <form wire:submit="updateProfileInformation" class="mt-6 space-y-6">
+    <form wire:submit="updateProfileInformation" class="mt-6 space-y-5">
+        <!-- Nama Lengkap -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <label for="name" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">
+                {{ __('Nama Lengkap') }}
+            </label>
+            <input wire:model="name" id="name" name="name" type="text" 
+                   class="block w-full rounded-xl border border-stone-200 bg-stone-50/50 px-4 py-3 text-sm text-stone-800 placeholder-stone-400 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all duration-200" 
+                   required autofocus autocomplete="name" placeholder="Nama Operator" />
+            <x-input-error class="mt-2 text-xs text-red-600 font-medium" :messages="$errors->get('name')" />
         </div>
 
+        <!-- Alamat Email -->
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" name="email" type="email" class="mt-1 block w-full" required autocomplete="username" />
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            <label for="email" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">
+                {{ __('Alamat Email Resmi') }}
+            </label>
+            <input wire:model="email" id="email" name="email" type="email" 
+                   class="block w-full rounded-xl border border-stone-200 bg-stone-50/50 px-4 py-3 text-sm text-stone-800 placeholder-stone-400 focus:border-amber-500 focus:bg-white focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all duration-200" 
+                   required autocomplete="username" placeholder="nama@museumtalaga.org" />
+            <x-input-error class="mt-2 text-xs text-red-600 font-medium" :messages="$errors->get('email')" />
 
+            <!-- Sistem Notifikasi Verifikasi Email -->
             @if (auth()->user() instanceof MustVerifyEmail && ! auth()->user()->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                        {{ __('Your email address is unverified.') }}
+                <div class="mt-3 p-4 bg-amber-50/50 border border-amber-200/50 rounded-xl">
+                    <p class="text-xs text-stone-600 leading-relaxed">
+                        {{ __('Alamat email Anda belum terverifikasi dengan benar.') }}
 
-                        <button wire:click.prevent="sendVerification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                            {{ __('Click here to re-send the verification email.') }}
+                        <button wire:click.prevent="sendVerification" class="block mt-1 font-bold text-amber-700 hover:text-amber-800 underline rounded focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            {{ __('Klik di sini untuk mengirim ulang email verifikasi.') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                        <p class="mt-2 font-semibold text-xs text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200/50 inline-block">
+                            {{ __('Tautan verifikasi baru telah berhasil dikirim ke alamat email Anda.') }}
                         </p>
                     @endif
                 </div>
             @endif
         </div>
 
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <!-- Tombol Simpan & Pesan Sukses Berhasil Disimpan -->
+        <div class="flex items-center gap-4 pt-2">
+            <button type="submit" 
+                    class="rounded-xl bg-amber-700 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-amber-600 hover:shadow-lg transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2">
+                {{ __('Simpan Profil') }}
+            </button>
 
-            <x-action-message class="me-3" on="profile-updated">
-                {{ __('Saved.') }}
+            <!-- Notifikasi teks berhasil disimpan bernuansa hijau alami pudar -->
+            <x-action-message class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-200/50" on="profile-updated">
+                {{ __('Perubahan berhasil disimpan.') }}
             </x-action-message>
         </div>
     </form>

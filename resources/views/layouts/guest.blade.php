@@ -1,30 +1,32 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Laravel') }} - Portal Admin</title>
 
-        <!-- Fonts -->
+        <!-- Fonts (Bisa disesuaikan jika ingin menggunakan font lain) -->
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link href="https://bunny.net" rel="stylesheet" />
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/" wire:navigate>
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+    <!-- PERBAIKAN: Mengunci background dasar body menggunakan warna krem hangat museum -->
+    <body class="font-sans text-stone-900 antialiased bg-[#fdfbf2]">
+        
+        <!-- 
+            PERBAIKAN UTAMA: 
+            Menghapus pembungkus logo bawaan Laravel dan kartu putih bawaan (sm:max-w-md bg-white shadow-md).
+            Sekarang layout hanya bertugas sebagai wadah fleksibel penuh agar diisi penuh oleh komponen Volt Anda.
+        -->
+        <div class="min-h-screen flex flex-col justify-center items-center">
+            {{ $slot }}
         </div>
+
     </body>
 </html>
+
