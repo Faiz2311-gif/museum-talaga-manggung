@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HalamanController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\GaleriController;
+
 
 // Halaman Utama Publik
 Route::view('/', 'welcome');
@@ -10,11 +12,9 @@ Route::view('/', 'welcome');
 // Route untuk halaman berita
 Route::get('/berita', [HalamanController::class, 'berita'])->name('berita');
 
-// Route untuk halaman kegiatan
-Route::get('/kegiatan', [HalamanController::class, 'kegiatan'])->name('kegiatan');
-
-// Route untuk halaman galeri
-Route::get('/galeri', [HalamanController::class, 'galeri'])->name('galeri');
+// Route untuk halaman galeri publik
+Route::get('/galeri', [GaleriController::class, 'index'])->name('galeri');
+Route::get('/galeri/{galeri}', [GaleriController::class, 'show'])->name('galeri.show');
 
 Route::get('/sejarah', [HalamanController::class, 'sejarah'])->name('sejarah');
 
@@ -62,19 +62,27 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ->name('admin.strukturorg');
 
     // 7. Mengarah ke views/admin/admgaleri.blade.php (Halaman Galeri Admin)
-    Route::view('galeri', 'admin.admgaleri')
-        ->middleware(['verified'])
-        ->name('admin.galeri');
+    Route::get('galeri-admin', [App\Http\Controllers\GaleriController::class, 'adminIndex'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.galeri.index');
+
+// 4. BARU: Rute otomatis untuk seluruh fungsi CRUD Galeri Admin (Terhubung ke GaleriController)
+// URL otomatis menjadi: /admin/galeri, /admin/galeri/create, dll.
+Route::resource('galeri', App\Http\Controllers\GaleriController::class)
+    ->names([
+        'index'   => 'admin.galeri.index',
+        'create'  => 'admin.galeri.create',
+        'store'   => 'admin.galeri.store',
+        'edit'    => 'admin.galeri.edit',
+        'update'  => 'admin.galeri.update',
+        'destroy' => 'admin.galeri.destroy',
+    ])
+    ->middleware(['auth', 'verified']);
 
     // Mengarah ke Controller untuk menangani tampilan tabel CRUD berita admin
 Route::get('berita-admin', [App\Http\Controllers\BeritaController::class, 'adminIndex'])
     ->middleware(['auth', 'verified'])
     ->name('admin.berita.index');
-
-    // 9. Mengarah ke views/admin/admkegiatan.blade.php (Halaman Kegiatan Admin)
-    Route::view('kegiatan-admin', 'admin.admkegiatan')
-        ->middleware(['verified'])
-        ->name('admin.kegiatan-admin');
 
     // 10. Rute otomatis untuk seluruh fungsi CRUD Berita Admin
     // URL otomatis menjadi: /admin/berita, /admin/berita/create, dll.

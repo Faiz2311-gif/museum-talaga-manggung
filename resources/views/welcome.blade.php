@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<a href="{{ route('galeri')}}" class="hover:text-amber-700 transition">Galeri</a>
+<a href="{{ route('galeri')}}" class="hover:text-amber-700 transition">Katalog</a>
 <a href="{{ route('berita.index') }}" class="hover:text-amber-700 transition">Berita</a>
 
             <!-- DROPDOWN 2: LIVING MUSEUM -->
@@ -83,7 +83,7 @@
         <a href="{{ route('strukturorg') }}" class="block hover:text-amber-700 text-xs transition">Struktur Organisasi</a>
     </div>
 
-    <a href="{{ route('galeri') }}" class="block hover:text-amber-700 py-1 transition">Galeri</a>
+    <a href="{{ route('galeri') }}" class="block hover:text-amber-700 py-1 transition">Katalog</a>
 
     <!-- Menu Berita kembali ke warna standar standar -->
     <a href="{{ route('berita.index') }}" class="block hover:text-amber-700 py-1 transition">Berita</a>

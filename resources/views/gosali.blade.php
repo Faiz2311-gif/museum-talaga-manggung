@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeri - Museum & Arsip Sejarah</title>
+    <title>Katalog - Museum & Arsip Sejarah</title>
     <!-- Menghubungkan aset CSS & JS lokal Laravel (Tailwind) -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- MENU AKTIF: Galeri berwarna amber -->
-                <a href="{{ route('galeri') }}" class=" hover:text-amber-700 transition">Galeri</a>
+                <a href="{{ route('galeri') }}" class=" hover:text-amber-700 transition">Katalog</a>
                 <a href="{{ route('berita.index') }}" class="hover:text-amber-700 transition">Berita</a>
 
                 <!-- Dropdown Living Museum (Sudah Interaktif Klik) -->
@@ -74,7 +74,7 @@
                 <a href="{{ route('visimisi') }}" class="block hover:text-amber-700 text-xs transition">Visi & Misi</a>
                 <a href="{{ route('strukturorg') }}" class="block hover:text-amber-700 text-xs transition">Struktur Organisasi</a>
             </div>
-            <a href="{{ route('galeri') }}" class="block hover:text-amber-700 py-1 transition">Galeri</a>
+            <a href="{{ route('galeri') }}" class="block hover:text-amber-700 py-1 transition">Katalog</a>
             <a href="{{ route('berita.index') }}" class="block hover:text-amber-700 py-1 transition">Berita</a>
             <div class="border-l-2 border-amber-200 pl-3 space-y-2 my-1">
                 <span class="text-xs text-stone-400 uppercase tracking-wider block">Living Museum</span>

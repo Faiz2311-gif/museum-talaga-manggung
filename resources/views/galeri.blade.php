@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- MENU AKTIF: Galeri berwarna amber -->
-                <a href="{{ route('galeri') }}" class="text-amber-500 hover:text-amber-700 transition">Galeri</a>
+                <a href="{{ route('galeri') }}" class="text-amber-500 hover:text-amber-700 transition">Katalog</a>
                 <a href="{{ route('berita.index') }}" class="hover:text-amber-700 transition">Berita</a>
 
                 <!-- Dropdown Living Museum (Sudah Interaktif Klik) -->
@@ -74,7 +74,7 @@
                 <a href="{{ route('visimisi') }}" class="block hover:text-amber-700 text-xs transition">Visi & Misi</a>
                 <a href="{{ route('strukturorg') }}" class="block hover:text-amber-700 text-xs transition">Struktur Organisasi</a>
             </div>
-            <a href="{{ route('galeri') }}" class="block text-amber-500 hover:text-amber-700 py-1 transition">Galeri</a>
+            <a href="{{ route('galeri') }}" class="block text-amber-500 hover:text-amber-700 py-1 transition">Katalog</a>
             <a href="{{ route('berita.index') }}" class="block hover:text-amber-700 py-1 transition">Berita</a>
             <div class="border-l-2 border-amber-200 pl-3 space-y-2 my-1">
                 <span class="text-xs text-stone-400 uppercase tracking-wider block">Living Museum</span>
@@ -94,59 +94,88 @@
             Arsip & Dokumentasi Visual
         </span>
         <h1 class="text-4xl md:text-5xl font-black text-amber-700 tracking-tight leading-[1.15] mb-4">
-            Galeri Sejarah Museum
+            Katalog Galeri
         </h1>
         <p class="font-sans text-sm text-stone-600 leading-relaxed max-w-xl">
             Jajahi kumpulan arsip visual artefak, dokumentasi sejarah, dan runtunan kegiatan pelestarian budaya di Museum Talaga Manggung.
         </p>
     </div>
 
-    <!-- Bilah Filter Kategori -->
+    <!-- Bilah Filter Kategori Dinamis -->
     <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-10 scrollbar-none whitespace-nowrap">
-        <button class="px-5 py-2 text-sm font-medium rounded-full bg-amber-600 text-white shadow-md shadow-amber-600/10 hover:bg-amber-700 hover:shadow-lg transition-all duration-200">Semua Foto</button>
-        <button class="px-5 py-2 text-sm font-medium rounded-full bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30 transition-all duration-200">Artefak Kerajaan</button>
-        <button class="px-5 py-2 text-sm font-medium rounded-full bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30 transition-all duration-200">Naskah Kuno</button>
-        <button class="px-5 py-2 text-sm font-medium rounded-full bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30 transition-all duration-200">Upacara Adat</button>
-        <button class="px-5 py-2 text-sm font-medium rounded-full bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30 transition-all duration-200">Dokumentasi Kegiatan</button>
+        <!-- Tombol Semua Kategori -->
+        <a href="{{ route('galeri') }}" 
+           class="px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 {{ !request('kategori') ? 'bg-amber-600 text-white shadow-md shadow-amber-600/10' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600' }}">
+            Semua Foto
+        </a>
+
+        @foreach(['Arca Perunggu', 'Terracotta', 'Perlengkapan Ritual', 'Senjata Tradisional', 'Senjata Berpeledak', 'Pakaian Perlengkapan Perang', 'Etnografika', 'Keramokologika', 'Numismatika'] as $kat)
+            <a href="{{ route('galeri', ['kategori' => $kat]) }}" 
+               class="px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 {{ request('kategori') == $kat ? 'bg-amber-600 text-white shadow-md shadow-amber-600/10' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30' }}">
+                {{ $kat }}
+            </a>
+        @endforeach
     </div>
 
-    <!-- Grid Foto (Kiri ke Kanan, Responsif) -->
+    <!-- Grid Foto (Dinamis Berdasarkan Data Controller) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-        <!-- Item Foto 1 -->
-        <div class="flex flex-col relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
-            <div class="overflow-hidden aspect-[4/3] bg-stone-100">
-                <!-- Jangan lupa mengganti tautan src di bawah dengan URL gambar asli Anda -->
-                <img src="https://unsplash.com" alt="Keris Pusaka Talaga" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
-            </div>
-            <div class="p-4 bg-white flex-grow flex flex-col justify-between">
-                <div>
-                    <p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">Artefak Kerajaan</p>
-                    <h3 class="text-sm font-semibold text-stone-800 mt-1 group-hover:text-amber-600 transition-colors">Keris Pusaka Talaga</h3>
+        @forelse($galeri as $item)
+            <!-- Item Foto / Artefak -->
+            <div class="flex flex-col relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                
+                <!-- Pembungkus Gambar Thumbnail -->
+                <div class="overflow-hidden aspect-[4/3] bg-stone-100 relative">
+                    <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
+                    
+                    <!-- Badge Indikator Konten 3D di Atas Gambar -->
+                    @if($item->link_3d)
+                        <span class="absolute top-3 right-3 bg-amber-600 text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider animate-pulse">
+                            3D Model
+                        </span>
+                    @endif
                 </div>
-            </div>
-        </div>
 
-        <!-- Item Foto 2 -->
-        <div class="flex flex-col relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
-            <div class="overflow-hidden aspect-[4/3] bg-stone-100">
-                <!-- Jangan lupa mengganti tautan src di bawah dengan URL gambar asli Anda -->
-                <img src="https://unsplash.com" alt="Prasasti & Piagam" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
-            </div>
-            <div class="p-4 bg-white flex-grow flex flex-col justify-between">
-                <div>
-                    <p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">Naskah Kuno</p>
-                    <h3 class="text-sm font-semibold text-stone-800 mt-1 group-hover:text-amber-600 transition-colors">Prasasti & Piagam Daun Lontar</h3>
+                <!-- Detail Konten -->
+                <div class="p-4 bg-white flex-grow flex flex-col justify-between gap-4">
+                    <div>
+                        <p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">{{ $item->kategori }}</p>
+                        <h3 class="text-sm font-semibold text-stone-800 mt-1 group-hover:text-amber-600 transition-colors">{{ $item->judul }}</h3>
+                        @if($item->deskripsi)
+                            <p class="text-xs text-stone-500 mt-1 line-clamp-2">{{ $item->deskripsi }}</p>
+                        @endif
+                    </div>
+
+                    <div class="pt-2 border-t border-stone-100 flex flex-col gap-2">
+                        <a href="{{ route('galeri.show', $item) }}" class="w-full inline-flex items-center justify-center bg-stone-800 hover:bg-stone-900 text-white font-bold text-xs px-3 py-2.5 rounded-xl transition duration-200">
+                            Lihat Detail
+                        </a>
+
+                        @if($item->link_3d)
+                            <a href="{{ $item->link_3d }}" target="_blank" rel="noopener noreferrer" 
+                               class="w-full inline-flex items-center justify-center space-x-2 bg-amber-700 hover:bg-amber-800 text-white font-bold text-xs px-3 py-2.5 rounded-xl transition duration-200 shadow-sm">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-3-3M21 7.5l-3 3M21 7.5H8.25m0 0l3 3m-3-3l3-3M3 12h.008v.008H3V12zm0 4.5h.008v.008H3v-.008zm0-9h.008v.008H3V7.5z" />
+                                </svg>
+                                <span>Lihat Artefak 3D</span>
+                            </a>
+                        @endif
+                    </div>
                 </div>
             </div>
-        </div>
+        @empty
+            <!-- State Jika Data Kosong -->
+            <div class="col-span-full py-16 text-center text-stone-400 text-sm italic">
+                Belum ada dokumentasi foto atau artefak untuk kategori ini.
+            </div>
+        @endforelse
 
     </div>
 </main>
 
 
 
-            <!-- Item Foto 3 -->
+
 <footer class="bg-[#1c1917] text-stone-400 text-xs py-12 border-t border-stone-800 font-sans mt-auto w-full overflow-hidden">
     <!-- Membungkus isi dengan wadah maksimal max-w-7xl dan menambahkan padding x-6 yang aman -->
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">

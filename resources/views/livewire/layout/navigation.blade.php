@@ -76,14 +76,15 @@ $logout = function (Logout $logout) {
         </a>
 
         <!-- 5. Galeri -->
-        <a href="{{ route('admin.galeri') }}" wire:navigate 
-           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
-                  {{ request()->routeIs('admin.galeri') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
-            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.galeri') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-            </svg>
-            {{ __('Galeri') }}
-        </a>
+        <a href="{{ route('admin.galeri.index') }}" wire:navigate 
+   class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+          {{ request()->routeIs('admin.galeri.index*') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+    <!-- Ikon Galeri Gambar Media -->
+    <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.galeri.index*') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+    </svg>
+    {{ __('Katalog Galeri') }}
+</a>
 
         <!-- 6. Berita -->
        <a href="{{ route('admin.berita.index') }}" wire:navigate 
