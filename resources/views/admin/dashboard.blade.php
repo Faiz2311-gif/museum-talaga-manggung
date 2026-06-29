@@ -23,8 +23,8 @@
             <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200" 
                  class="bg-white border border-amber-200/60 overflow-hidden shadow-sm rounded-2xl p-8 hover:shadow-md transition-shadow duration-300">
                 
+                <!-- Indikator Berhasil Masuk Bergaya Minimalis -->
                 <div class="flex items-center space-x-4 border-b border-stone-100 pb-6 mb-6">
-                    <!-- Indikator Berhasil Masuk Bergaya Minimalis -->
                     <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 border border-amber-200 text-amber-700">
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -35,55 +35,91 @@
                         <p class="text-xs text-stone-500">{{ __("Sesi Anda saat ini aktif dan terenkripsi dengan aman.") }}</p>
                     </div>
                 </div>
-
-                <!-- Konten Menu Pintas Kontrol Admin ke Bagian User Biasa -->
-                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mt-6">
-                    
-                    <!-- Menu Pintas 1 -->
-                     <a href="/" wire:navigate class="group flex flex-col justify-between p-5 bg-stone-50/50 hover:bg-amber-50/30 border border-stone-200/70 hover:border-amber-500/50 rounded-xl transition-all duration-200 shadow-sm hover:shadow-md">
-    <div>
-        <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Halaman Utama</span>
-        <h4 class="text-sm font-bold text-stone-800 mt-1 group-hover:text-amber-700 transition-colors">Kelola Konten Beranda</h4>
-    </div>
-    <span class="text-xs font-semibold text-stone-500 mt-4 inline-flex items-center group-hover:text-amber-700">
-        Buka modul <span class="ms-1 transform group-hover:translate-x-1 transition-transform">→</span>
-    </span>
-</a>
-
-                    <a href="/galeri" class="group flex flex-col justify-between p-5 bg-stone-50/50 hover:bg-amber-50/30 border border-stone-200/70 hover:border-amber-500/50 rounded-xl transition-all duration-200">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Arsip Gambar</span>
-                            <h4 class="text-sm font-bold text-stone-800 mt-1 group-hover:text-amber-700 transition-colors">Kelola Galeri Sejarah</h4>
-                        </div>
-                        <span class="text-xs font-semibold text-stone-500 mt-4 inline-flex items-center group-hover:text-amber-700">
-                            Buka modul <span class="ms-1 transform group-hover:translate-x-1 transition-transform">→</span>
-                        </span>
-                    </a>
-
-                    <!-- Menu Pintas 2 -->
-                    <a href="/berita" class="group flex flex-col justify-between p-5 bg-stone-50/50 hover:bg-amber-50/30 border border-stone-200/70 hover:border-amber-500/50 rounded-xl transition-all duration-200">
-                        <div>
-                            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Publikasi</span>
-                            <h4 class="text-sm font-bold text-stone-800 mt-1 group-hover:text-amber-700 transition-colors">Tulis Berita & Rilis</h4>
-                        </div>
-                        <span class="text-xs font-semibold text-stone-500 mt-4 inline-flex items-center group-hover:text-amber-700">
-                            Buka modul <span class="ms-1 transform group-hover:translate-x-1 transition-transform">→</span>
-                        </span>
-                    </a>
-
-                </div>
-            </div>
-
+    <!-- ================= GRAFIK DATA OPERASIONAL ================= -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 font-sans">
+    <!-- Grafik 1: Tren Pengunjung (Lebar 2 Kolom pada Layar Besar) -->
+    <div class="lg:col-span-2 bg-stone-50/60 border border-stone-200/70 p-6 rounded-xl shadow-sm">
+        <div class="flex flex-col mb-4">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Statistik Kunjungan</span>
+            <h4 class="text-sm font-bold text-stone-800 mt-0.5">Tren Pengunjung Pekan Ini</h4>
+        </div>
+        <div class="h-64 relative">
+            <canvas id="chartPengunjung"></canvas>
         </div>
     </div>
 
-    <!-- Script Pengaktif Animasi Masuk AOS -->
-    <script src="https://unpkg.com"></script>
-    <script>
-        AOS.init({
-            once: true,
-            easing: 'ease-out-cubic'
-        });
-    </script>
-</x-app-layout>
+    <!-- Grafik 2: Komposisi Kategori Berita (Lebar 1 Kolom) -->
+    <div class="bg-stone-50/60 border border-stone-200/70 p-6 rounded-xl shadow-sm flex flex-col justify-between">
+        <div class="flex flex-col mb-4">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-amber-600">Statistik Publikasi</span>
+            <h4 class="text-sm font-bold text-stone-800 mt-0.5">Distribusi Kategori Berita</h4>
+        </div>
+        <div class="h-56 flex items-center justify-center relative">
+            <canvas id="chartBerita"></canvas>
+        </div>
+    </div>
+</div>
+<!-- =========================================================== -->
 
+
+    <!-- Script Pengaktif Animasi Masuk AOS & Pustaka Chart.js -->
+   <!-- Pustaka Chart.js -->
+<script src="https://jsdelivr.net"></script>
+
+<script>
+    // 1. Grafik Pengunjung (Line Chart)
+    const ctxPengunjung = document.getElementById('chartPengunjung').getContext('2d');
+    new Chart(ctxPengunjung, {
+        type: 'line',
+        data: {
+            labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+            datasets: [{
+                label: 'Jumlah Pengunjung',
+                data:, // Data sampel kunjungan harian
+                borderColor: '#b45309', // Warna Amber-700
+                backgroundColor: 'rgba(180, 83, 9, 0.05)',
+                borderWidth: 2.5,
+                tension: 0.35,
+                fill: true,
+                pointBackgroundColor: '#b45309'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { grid: { display: true, color: '#f3f4f6' } },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 2. Grafik Kategori Berita (Doughnut Chart)
+    const ctxBerita = document.getElementById('chartBerita').getContext('2d');
+    new Chart(ctxBerita, {
+        type: 'doughnut',
+        data: {
+            labels: ['Konservasi', 'Edukasi', 'Eksibisi'],
+            datasets: [{
+                data:, // Data sampel jumlah artikel berita
+                backgroundColor: ['#b45309', '#d97706', '#78716c'], // Palet warna Amber & Stone
+                borderWidth: 2,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { boxWidth: 12, font: { size: 11 } }
+                }
+            },
+            cutout: '70%' // Membuat struktur lingkaran cincin donut yang tipis
+        }
+    });
+</script>
+
+</x-app-layout>

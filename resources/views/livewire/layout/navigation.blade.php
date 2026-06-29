@@ -26,14 +26,83 @@ $logout = function (Logout $logout) {
     <div class="flex flex-1 flex-col overflow-y-auto px-4 py-6 space-y-1.5">
         <span class="px-3 text-[10px] font-bold uppercase tracking-wider text-stone-400 mb-2 block">Menu Utama</span>
         
-        <!-- Link Dashboard -->
-        <a href="{{ route('dashboard') }}" wire:navigate 
+         <a href="{{ route('dashboard') }}" wire:navigate 
            class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
                   {{ request()->routeIs('dashboard') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
             <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('dashboard') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
             </svg>
             {{ __('Dashboard') }}
+        </a>
+
+        <!-- 1. Beranda -->
+        <a href="{{ route('admin.beranda') }}" wire:navigate 
+           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+                  {{ request()->routeIs('admin.beranda') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.beranda') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
+            {{ __('Beranda') }}
+        </a>
+
+        <!-- 2. Sejarah -->
+        <a href="{{ route('admin.sejarah') }}" wire:navigate 
+           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+                  {{ request()->routeIs('admin.sejarah') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.sejarah') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+            </svg>
+            {{ __('Sejarah') }}
+        </a>
+
+        <!-- 3. Visi & Misi -->
+        <a href="{{ route('admin.visimisi') }}" wire:navigate 
+           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+                  {{ request()->routeIs('admin.visimisi') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.visimisi') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            {{ __('Visi & Misi') }}
+        </a>
+
+        <!-- 4. Struktur Organisasi -->
+        <a href="{{ route('admin.strukturorg') }}" wire:navigate 
+           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+                  {{ request()->routeIs('admin.strukturorg') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.strukturorg') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>
+            {{ __('Struktur Organisasi') }}
+        </a>
+
+        <!-- 5. Galeri -->
+        <a href="{{ route('admin.galeri') }}" wire:navigate 
+           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+                  {{ request()->routeIs('admin.galeri') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.galeri') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+            {{ __('Galeri') }}
+        </a>
+
+        <!-- 6. Berita -->
+        <a href="{{ route('admin.berita-admin') }}" wire:navigate 
+           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+                  {{ request()->routeIs('admin.berita-admin') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.berita-admin') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125H3.375a1.125 1.125 0 0 1-1.125-1.125V5.625c0-.621.504-1.125 1.125-1.125H15.75m-3-1.5h.008v.008H12.75V3Zm0 3h.008v.008H12.75V6Zm0 6h.008v.008H12.75v-.008Zm0 3h.008v.008H12.75V15Z" />
+            </svg>
+            {{ __('Berita') }}
+        </a>
+
+        <!-- 7. Kegiatan -->
+        <a href="{{ route('admin.kegiatan-admin') }}" wire:navigate 
+           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+                  {{ request()->routeIs('admin.kegiatan-admin') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.kegiatan-admin') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+            </svg>
+            {{ __('Kegiatan') }}
         </a>
     </div>
 

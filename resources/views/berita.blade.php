@@ -41,7 +41,7 @@
 
                 <!-- MENU AKTIF: Galeri berwarna amber -->
                 <a href="{{ route('galeri') }}" class=" hover:text-amber-700 transition">Galeri</a>
-                <a href="{{ route('berita') }}" class=" text-amber-500 hover:text-amber-700 transition">Berita</a>
+                <a href="{{ route('berita.index') }}" class=" text-amber-500 hover:text-amber-700 transition">Berita</a>
                 <a href="{{ route('kegiatan') }}" class="hover:text-amber-700 transition">Kegiatan</a>
 
                 <!-- Dropdown Living Museum (Sudah Interaktif Klik) -->
@@ -76,7 +76,7 @@
                 <a href="{{ route('strukturorg') }}" class="block hover:text-amber-700 text-xs transition">Struktur Organisasi</a>
             </div>
             <a href="{{ route('galeri') }}" class="block hover:text-amber-700 py-1 transition">Galeri</a>
-            <a href="{{ route('berita') }}" class="block  text-amber-500 hover:text-amber-700 py-1 transition">Berita</a>
+            <a href="{{ route('berita.index') }}" class="block  text-amber-500 hover:text-amber-700 py-1 transition">Berita</a>
             <a href="{{ route('kegiatan') }}" class="block hover:text-amber-700 py-1 transition">Kegiatan</a>
             <div class="border-l-2 border-amber-200 pl-3 space-y-2 my-1">
                 <span class="text-xs text-stone-400 uppercase tracking-wider block">Living Museum</span>
@@ -88,80 +88,69 @@
 
     <!-- 2. KONTEN UTAMA HALAMAN BERITA -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12">
-        <!-- Header Halaman -->
-        <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
-            <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-medium px-4 py-1.5 rounded-full mb-6 font-sans">
-                Kabar & Publikasi Instansi
-            </span>
-            <!-- Update font-serif font-black tracking-tight untuk menyamakan dengan gambar -->
-            <h1 class="text-4xl md:text-5xl font-black text-amber-700 tracking-tight leading-[1.15] mb-4">
-                Kabar & Rilis Berita Museum
-            </h1>
-            <p class="font-sans text-sm text-stone-600 leading-relaxed max-w-xl">
-                Ikuti perkembangan terbaru mengenai konservasi artefak, temuan arsip sejarah, dan agenda kebudayaan di Museum Talaga Manggung.
-            </p>
-        </div>
+    <!-- Header Halaman -->
+    <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
+        <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-medium px-4 py-1.5 rounded-full mb-6 font-sans">
+            Kabar & Publikasi Instansi
+        </span>
+        <h1 class="text-4xl md:text-5xl font-black text-amber-700 tracking-tight leading-[1.15] mb-4">
+            Kabar & Rilis Berita Museum
+        </h1>
+        <p class="font-sans text-sm text-stone-600 leading-relaxed max-w-xl">
+            Ikuti perkembangan terbaru mengenai konservasi artefak, temuan arsip sejarah, dan agenda kebudayaan di Museum Talaga Manggung.
+        </p>
+    </div>
 
-        <!-- Grid Kartu Berita -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 font-sans">
+    <!-- Grid Kartu Berita -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 font-sans">
 
-            <!-- Berita 1 -->
+        @forelse ($berita as $item)
+            <!-- Kartu Berita Dinamis -->
             <article class="bg-white border border-amber-100 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition duration-300 flex flex-col">
                 <div class="h-48 bg-stone-200 relative">
-                    <div class="absolute inset-0 flex items-center justify-center text-stone-400 font-medium text-xs">Foto Artefak</div>
+                    @if($item->foto)
+                        <!-- Menampilkan Foto dari Storage -->
+                        <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover">
+                    @else
+                        <!-- Fallback jika tidak ada foto -->
+                        <div class="absolute inset-0 flex items-center justify-center text-stone-400 font-medium text-xs">Tidak Ada Foto</div>
+                    @endif
                 </div>
                 <div class="p-6 flex flex-col flex-grow">
-                    <span class="text-[11px] font-semibold text-amber-600 uppercase tracking-wider block mb-2">Konservasi</span>
-                    <!-- Update font judul artikel menggunakan font-serif bold -->
+                    <!-- Kategori Berita -->
+                    <span class="text-[11px] font-semibold text-amber-600 uppercase tracking-wider block mb-2">
+                        {{ $item->kategori }}
+                    </span>
+                    
+                    <!-- Judul Artikel -->
                     <h2 class="text-lg font-serif font-bold text-stone-800 tracking-tight mb-2 hover:text-amber-700 transition">
-                        <a href="#">Restorasi Naskah Kuno Abad ke-17 Rampung Selesai</a>
+                        <a href="{{ route('berita.show', $item->id) }}">{{ $item->judul }}</a>
                     </h2>
-                    <p class="text-xs text-stone-600 leading-relaxed mb-4 line-clamp-3">Tim konservator berhasil membersihkan dan mendigitalisasi lembaran naskah kuno berbahan dasar daun lontar asli warisan kerajaan...</p>
+                    
+                    <!-- Ringkasan Deskripsi -->
+                    <p class="text-xs text-stone-600 leading-relaxed mb-4 line-clamp-3">
+                        {{ $item->ringkasan }}
+                    </p>
+                    
                     <div class="mt-auto pt-4 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
-                        <span>30 Mei 2026</span>
-                        <a href="#" class="font-semibold text-amber-600 hover:text-amber-800">Baca Selengkapnya →</a>
+                        <!-- Format Tanggal Indonesia (Contoh: 30 Mei 2026) -->
+                        <span>{{ \Carbon\Carbon::parse($item->tanggal_publikasi)->translatedFormat('d F Y') }}</span>
+                        
+                        <!-- Link ke Detail Berita -->
+                        <a href="{{ route('berita.show', $item->id) }}" class="font-semibold text-amber-600 hover:text-amber-800">
+                            Baca Selengkapnya →
+                        </a>
                     </div>
                 </div>
             </article>
+        @empty
+            <!-- Tampilan jika database masih kosong -->
+            <div class="col-span-full text-center py-12 text-stone-500 font-sans">
+                Belum ada berita yang dipublikasikan.
+            </div>
+        @endforelse
 
-            <!-- Berita 2 -->
-            <article class="bg-white border border-amber-100 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition duration-300 flex flex-col">
-                <div class="h-48 bg-stone-200 relative">
-                    <div class="absolute inset-0 flex items-center justify-center text-stone-400 font-medium text-xs">Foto Kunjungan</div>
-                </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <span class="text-[11px] font-semibold text-amber-600 uppercase tracking-wider block mb-2">Edukasi</span>
-                    <h2 class="text-lg font-serif font-bold text-stone-800 tracking-tight mb-2 hover:text-amber-700 transition">
-                        <a href="#">Kunjungan Studi Sejarah Interaktif Tingkat Nasional</a>
-                    </h2>
-                    <p class="text-xs text-stone-600 leading-relaxed mb-4 line-clamp-3">Museum menerima kunjungan kehormatan dari delegasi universitas untuk meneliti keterkaitan arsip lokal dengan peta perdagangan maritim...</p>
-<div class="mt-auto pt-4 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
-                        <span>25 Mei 2026</span>
-                        <a href="#" class="font-semibold text-amber-600 hover:text-amber-800">Baca Selengkapnya →</a>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Berita 3 -->
-            <article class="bg-white border border-amber-100 rounded-xl shadow-sm overflow-hidden hover:shadow-md transition duration-300 flex flex-col">
-                <div class="h-48 bg-stone-200 relative">
-                    <div class="absolute inset-0 flex items-center justify-center text-stone-400 font-medium text-xs">Foto Hibahan</div>
-                </div>
-                <div class="p-6 flex flex-col flex-grow">
-                    <span class="text-[11px] font-semibold text-amber-600 uppercase tracking-wider block mb-2">Eksibisi</span>
-                    <h2 class="text-lg font-serif font-bold text-stone-800 tracking-tight mb-2 hover:text-amber-700 transition">
-                        <a href="#">Penambahan Koleksi Baru Hibah Keramik Dinasti Ming</a>
-                    </h2>
-                    <p class="text-xs text-stone-600 leading-relaxed mb-4 line-clamp-3">Seorang kolektor lokal secara resmi menyerahkan tiga buah mangkuk keramik otentik untuk dipamerkan di ruang publik galeri utama...</p>
-                    <div class="mt-auto pt-4 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500">
-                        <span>18 Mei 2026</span>
-                        <a href="#" class="font-semibold text-amber-600 hover:text-amber-800">Baca Selengkapnya →</a>
-                    </div>
-                </div>
-            </article>
-
-        </div>
-    </section>
+    </div>
 </main>
 
 <footer class="bg-[#1c1917] text-stone-400 text-xs py-12 border-t border-stone-800 font-sans mt-auto w-full overflow-hidden">
@@ -181,10 +170,10 @@
         <div class="flex flex-col space-y-2.5">
             <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Akses Pintasan</h4>
             <div class="grid grid-cols-2 gap-x-4 gap-y-2 max-w-xs mx-auto md:mx-0 text-left">
-                <a href="{{ url('/') }}" class="hover:text-white hover:underline transition">Beranda</a>
+                {{-- <a href="{{ url('/') }}" class="hover:text-white hover:underline transition">Beranda</a>
                 <a href="{{ route('berita') }}" class="hover:text-white hover:underline transition">Berita</a>
                 <a href="{{ url('/#pameran') }}" class="hover:text-white hover:underline transition">Galeri</a>
-                <a href="{{ route('kegiatan') }}" class="hover:text-white hover:underline transition">Kegiatan</a>
+                <a href="{{ route('kegiatan') }}" class="hover:text-white hover:underline transition">Kegiatan</a> --}}
             </div>
         </div>
 

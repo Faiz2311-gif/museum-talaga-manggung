@@ -43,7 +43,7 @@
 </div>
 
 <a href="{{ route('galeri')}}" class="hover:text-amber-700 transition">Galeri</a>
-<a href="{{ route('berita') }}" class="hover:text-amber-700 transition">Berita</a>
+<a href="{{ route('berita.index') }}" class="hover:text-amber-700 transition">Berita</a>
                 <a href="{{ route('kegiatan') }}" class=" hover:text-amber-700 transition">Kegiatan</a>
 
             <!-- DROPDOWN 2: LIVING MUSEUM -->
@@ -87,7 +87,7 @@
     <a href="{{ route('galeri') }}" class="block hover:text-amber-700 py-1 transition">Galeri</a>
 
     <!-- Menu Berita kembali ke warna standar standar -->
-    <a href="{{ route('berita') }}" class="block hover:text-amber-700 py-1 transition">Berita</a>
+    <a href="{{ route('berita.index') }}" class="block hover:text-amber-700 py-1 transition">Berita</a>
     <a href="{{ route('kegiatan') }}" class="block hover:text-amber-700 py-1 transition">Kegiatan</a>
 
     <div class="border-l-2 border-amber-200 pl-3 space-y-2 my-1">
@@ -221,10 +221,10 @@ document.addEventListener('DOMContentLoaded', function () {
         <div class="flex flex-col space-y-2.5">
             <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Akses Pintasan</h4>
             <div class="grid grid-cols-2 gap-x-4 gap-y-2 max-w-xs mx-auto md:mx-0 text-left">
-                <a href="{{ url('/') }}" class="hover:text-white hover:underline transition">Beranda</a>
+                {{-- <a href="{{ url('/') }}" class="hover:text-white hover:underline transition">Beranda</a>
                 <a href="{{ route('berita') }}" class="hover:text-white hover:underline transition">Berita</a>
                 <a href="{{ url('/#pameran') }}" class="hover:text-white hover:underline transition">Galeri</a>
-                <a href="{{ route('kegiatan') }}" class="hover:text-white hover:underline transition">Kegiatan</a>
+                <a href="{{ route('kegiatan') }}" class="hover:text-white hover:underline transition">Kegiatan</a> --}}
             </div>
         </div>
 
