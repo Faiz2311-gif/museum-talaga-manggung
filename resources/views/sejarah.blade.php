@@ -42,7 +42,6 @@
                 <!-- MENU AKTIF: Galeri berwarna amber -->
                 <a href="{{ route('galeri') }}" class="hover:text-amber-700 transition">Galeri</a>
                 <a href="{{ route('berita.index') }}" class="hover:text-amber-700 transition">Berita</a>
-                <a href="{{ route('kegiatan') }}" class="hover:text-amber-700 transition">Kegiatan</a>
 
                 <!-- Dropdown Living Museum (Sudah Interaktif Klik) -->
                 <div class="relative inline-block text-left">
@@ -77,7 +76,6 @@
             </div>
             <a href="{{ route('galeri') }}" class="block  hover:text-amber-700 py-1 transition">Galeri</a>
             <a href="{{ route('berita.index') }}" class="block hover:text-amber-700 py-1 transition">Berita</a>
-            <a href="{{ route('kegiatan') }}" class="block hover:text-amber-700 py-1 transition">Kegiatan</a>
             <div class="border-l-2 border-amber-200 pl-3 space-y-2 my-1">
                 <span class="text-xs text-stone-400 uppercase tracking-wider block">Living Museum</span>
                 <a href="{{route('walangsuji')}}" class="block hover:text-amber-700 text-xs transition">Walang Suji</a>

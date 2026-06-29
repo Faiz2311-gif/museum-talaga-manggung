@@ -44,7 +44,6 @@
 
 <a href="{{ route('galeri')}}" class="hover:text-amber-700 transition">Galeri</a>
 <a href="{{ route('berita.index') }}" class="hover:text-amber-700 transition">Berita</a>
-                <a href="{{ route('kegiatan') }}" class=" hover:text-amber-700 transition">Kegiatan</a>
 
             <!-- DROPDOWN 2: LIVING MUSEUM -->
 <div class="relative inline-block text-left">
@@ -88,7 +87,6 @@
 
     <!-- Menu Berita kembali ke warna standar standar -->
     <a href="{{ route('berita.index') }}" class="block hover:text-amber-700 py-1 transition">Berita</a>
-    <a href="{{ route('kegiatan') }}" class="block hover:text-amber-700 py-1 transition">Kegiatan</a>
 
     <div class="border-l-2 border-amber-200 pl-3 space-y-2 my-1">
         <span class="text-xs text-stone-400 uppercase tracking-wider block">Living Museum</span>
