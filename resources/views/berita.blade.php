@@ -101,6 +101,65 @@
         </p>
     </div>
 
+    <!-- Komponen Search, Filter & Sortir Berita -->
+<div class="mb-10 bg-white border border-amber-200/60 p-6 rounded-2xl shadow-sm">
+    <form action="{{ url()->current() }}" method="GET" class="space-y-4 md:space-y-0 md:flex md:items-end md:gap-4 justify-between">
+        
+        <!-- Bagian Input Pencarian Teks -->
+        <div class="flex-1">
+            <label Lifor="search" class="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1.5">Cari Artikel</label>
+            <div class="relative">
+                <input type="text" name="search" id="search" value="{{ request('search') }}" 
+                       placeholder="Masukkan judul atau kata kunci berita..." 
+                       class="w-full border border-stone-200 rounded-xl pl-10 pr-4 py-2 text-xs focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40 text-stone-700 font-medium placeholder-stone-400">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.604 10.604z" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bagian Opsi Dropdown Filter -->
+        <div class="grid grid-cols-2 gap-3 sm:w-auto w-full">
+            <!-- Filter Kategori -->
+            <div>
+                <label for="kategori" class="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1.5">Kategori</label>
+                <select name="kategori" id="kategori" onchange="this.form.submit()" class="w-full sm:w-44 border border-stone-200 rounded-xl px-3 py-2 text-xs focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40 text-stone-700 font-medium">
+                    <option value="">Semua Kategori</option>
+                    <option value="Kegiatan" {{ request('kategori') == 'Kegiatan' ? 'selected' : '' }}>Kegiatan</option>
+                    <option value="Pengumuman" {{ request('kategori') == 'Pengumuman' ? 'selected' : '' }}>Pengumuman</option>
+                    <option value="Penelitian" {{ request('kategori') == 'Penelitian' ? 'selected' : '' }}>Penelitian</option>
+                    <option value="Event" {{ request('kategori') == 'Event' ? 'selected' : '' }}>Event</option>
+                </select>
+            </div>
+
+            <!-- Urutan Rilis -->
+            <div>
+                <label for="urutan" class="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1.5">Urutan Rilis</label>
+                <select name="urutan" id="urutan" onchange="this.form.submit()" class="w-full sm:w-44 border border-stone-200 rounded-xl px-3 py-2 text-xs focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40 text-stone-700 font-medium">
+                    <option value="terbaru" {{ request('urutan') == 'terbaru' ? 'selected' : '' }}>Terbaru ➔ Terlama</option>
+                    <option value="terlama" {{ request('urutan') == 'terlama' ? 'selected' : '' }}>Terlama ➔ Terbaru</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Tombol Aksi Manual (Khusus Input Pencarian) & Reset -->
+        <div class="flex items-center gap-2 pt-2 md:pt-0 w-full md:w-auto">
+            <button type="submit" class="w-full md:w-auto bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs px-4 py-2 rounded-xl shadow-sm transition whitespace-nowrap">
+                Cari
+            </button>
+            @if(request('search') || request('kategori') || (request('urutan') && request('urutan') !== 'terbaru'))
+                <a href="{{ url()->current() }}" class="w-full md:w-auto text-center border border-stone-200 bg-stone-50 hover:bg-stone-100 text-stone-600 font-bold text-xs px-4 py-2 rounded-xl transition whitespace-nowrap">
+                    ✕ Reset
+                </a>
+            @endif
+        </div>
+
+    </form>
+</div>
+
+
     <!-- Grid Kartu Berita -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 font-sans">
 

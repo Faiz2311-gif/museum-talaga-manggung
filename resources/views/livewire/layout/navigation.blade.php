@@ -86,14 +86,15 @@ $logout = function (Logout $logout) {
         </a>
 
         <!-- 6. Berita -->
-        <a href="{{ route('admin.berita-admin') }}" wire:navigate 
-           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
-                  {{ request()->routeIs('admin.berita-admin') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
-            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.berita-admin') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125H3.375a1.125 1.125 0 0 1-1.125-1.125V5.625c0-.621.504-1.125 1.125-1.125H15.75m-3-1.5h.008v.008H12.75V3Zm0 3h.008v.008H12.75V6Zm0 6h.008v.008H12.75v-.008Zm0 3h.008v.008H12.75V15Z" />
-            </svg>
-            {{ __('Berita') }}
-        </a>
+       <a href="{{ route('admin.berita.index') }}" wire:navigate 
+   class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+          {{ request()->routeIs('admin.berita.index') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+    <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.berita.index') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125H3.375a1.125 1.125 0 0 1-1.125-1.125V5.625c0-.621.504-1.125 1.125-1.125H15.75m-3-1.5h.008v.008H12.75V3Zm0 3h.008v.008H12.75V6Zm0 6h.008v.008H12.75v-.008Zm0 3h.008v.008H12.75V15Z" />
+    </svg>
+    {{ __('Berita') }}
+</a>
+
 
         <!-- 7. Kegiatan -->
         <a href="{{ route('admin.kegiatan-admin') }}" wire:navigate 

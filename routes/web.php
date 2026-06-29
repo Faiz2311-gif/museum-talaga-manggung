@@ -66,10 +66,10 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ->middleware(['verified'])
         ->name('admin.galeri');
 
-    // 8. Mengarah ke views/admin/admberita.blade.php (Halaman Berita Admin)
-    Route::view('berita-admin', 'admin.admberita')
-        ->middleware(['verified'])
-        ->name('admin.berita-admin');
+    // Mengarah ke Controller untuk menangani tampilan tabel CRUD berita admin
+Route::get('berita-admin', [App\Http\Controllers\BeritaController::class, 'adminIndex'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.berita.index');
 
     // 9. Mengarah ke views/admin/admkegiatan.blade.php (Halaman Kegiatan Admin)
     Route::view('kegiatan-admin', 'admin.admkegiatan')
@@ -78,7 +78,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     // 10. Rute otomatis untuk seluruh fungsi CRUD Berita Admin
     // URL otomatis menjadi: /admin/berita, /admin/berita/create, dll.
-    Route::resource('berita', App\Http\Controllers\BeritaController::class);
+    Route::resource('berita', App\Http\Controllers\BeritaController::class)
+        ->middleware(['verified']);
 
     // 5. Rute Placeholder Dinamis untuk Menu Lain yang Belum Dibuat Filenya
     Route::get('modul/{menu}', function ($menu) {
