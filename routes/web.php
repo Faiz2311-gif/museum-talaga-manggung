@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HalamanController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\SejarahAdminController;
+use App\Http\Controllers\VisiMisiAdminController;
+use App\Http\Controllers\HomeSectionController;
+use App\Http\Controllers\HomeCardController;
 
 
 // Halaman Utama Publik
@@ -60,14 +64,22 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ])
         ->middleware(['auth', 'verified']);
     // 4. Mengarah ke views/admin/admsejarah.blade.php (Halaman Sejarah Admin)
-    Route::view('sejarah', 'admin.admsejarah')
-        ->middleware(['verified'])
-        ->name('admin.sejarah');
+    // Cukup buat satu grup utama untuk panel admin di file web.php Anda
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    // Menampilkan Halaman Utama & Mengontrol Form Edit/Create
+    Route::get('/sejarah', [SejarahAdminController::class, 'index'])->name('sejarah.index');
+    
+    // Menyimpan / Memperbarui Data ke Database
+    Route::post('/sejarah/update', [SejarahAdminController::class, 'update'])->name('sejarah.update');
+});
+
+
 
     // 5. Mengarah ke views/admin/admvisimisi.blade.php (Halaman Visi & Misi Admin)
-    Route::view('visimisi', 'admin.admvisimisi')
-        ->middleware(['verified'])
-        ->name('admin.visimisi');
+    Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/visimisi', [VisiMisiAdminController::class, 'index'])->name('visimisi.index');
+    Route::post('/visimisi/update', [VisiMisiAdminController::class, 'update'])->name('visimisi.update');
+});
 
     // 6. Mengarah ke views/admin/admstog.blade.php (Halaman Struktur Organisasi Admin)
     Route::view('strukturorg', 'admin.admstog')

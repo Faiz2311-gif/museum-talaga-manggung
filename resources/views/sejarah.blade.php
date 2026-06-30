@@ -84,13 +84,54 @@
         </div>
     </header>
 
-    <!-- 2. KONTEN UTAMA: GALERI (Gaya Google Images) -->
-    <!-- PERBAIKAN: Mengubah background utama menjadi warna krem hangat (#fdfbf2) -->
-<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 bg-[#fdfbf2]">
+<!-- 2. KONTEN UTAMA: HALAMAN SEJARAH DINAMIS -->
+<main class="flex-grow max-w-4xl w-full mx-auto px-6 py-12 bg-[#fdfbf2] font-sans">
+    
+    <!-- Bagian Judul dan Abstrak Sejarah -->
+    <div class="text-center mb-12 flex flex-col items-center" data-aos="fade-down" data-aos-duration="800">
+        <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-bold tracking-wider px-4 py-1.5 rounded-full mb-4 uppercase">
+            Profil Museum
+        </span>
+        <h1 class="text-3xl md:text-5xl font-black text-amber-800 tracking-tight leading-tight">
+            {{ $sejarahData['sejarah_title'] ?? 'Sejarah Kerajaan Talaga Manggung' }}
+        </h1>
+        <p class="mt-4 text-stone-600 text-sm md:text-base leading-relaxed max-w-2xl italic">
+            "{{ $sejarahData['sejarah_subtitle'] ?? 'Menelusuri jejak luhur peradaban, titisan benda pusaka, dan kronik kegemilangan masa lalu institusi.' }}"
+        </p>
+        <div class="h-0.5 w-16 bg-amber-600 rounded-full mt-6"></div>
+    </div>
 
-    Halaman Placeholder
+    <!-- Wadah Artikel Narasi Panjang -->
+    <div class="bg-white border border-amber-200/60 rounded-2xl p-8 md:p-10 shadow-sm text-stone-700 text-sm leading-relaxed tracking-wide text-justify space-y-6" 
+         data-aos="fade-up" 
+         data-aos-duration="1000" 
+         data-aos-delay="200">
+        
+        <!-- Gambar Utama Sejarah (Ditambahkan secara kondisional) -->
+        @if(!empty($sejarahData['sejarah_image']))
+            <div class="w-full mb-8 overflow-hidden rounded-xl border border-amber-200/40 shadow-sm">
+                <img src="{{ asset('storage/' . $sejarahData['sejarah_image']) }}" 
+                     alt="{{ $sejarahData['sejarah_title'] ?? 'Gambar Sejarah' }}" 
+                     class="w-full h-auto max-h-[450px] object-cover transition-transform duration-700 hover:scale-105">
+            </div>
+        @endif
+        
+        <!-- Paragraf Utama / Pembuka -->
+        <p class="whitespace-pre-line first-letter:text-4xl first-letter:font-black first-letter:text-amber-700 first-letter:mr-2 first-letter:float-left">
+            {{ $sejarahData['sejarah_body_1'] ?? 'Narasi teks dokumen sejarah utama belum diisi oleh pengelola admin museum. Silakan masuk ke panel dashboard admin untuk memperbarui isi catatan sejarah Kerajaan Talaga Manggung secara berkala.' }}
+        </p>
+
+        <!-- Paragraf Lanjutan -->
+        @if(!empty($sejarahData['sejarah_body_2']))
+            <p class="whitespace-pre-line pt-4 border-t border-stone-100">
+                {{ $sejarahData['sejarah_body_2'] }}
+            </p>
+        @endif
+    </div>
 
 </main>
+
+
 
 
 

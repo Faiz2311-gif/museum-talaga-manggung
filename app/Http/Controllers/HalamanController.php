@@ -50,9 +50,28 @@ class HalamanController extends Controller
     }
 
     public function sejarah()
-    {
-        return view('sejarah');
+{
+    try {
+        // Mencoba mengambil data dengan kolom standar 'content'
+        $sejarahData = \DB::table('sections')
+            ->where('page', 'sejarah')
+            ->pluck('content', 'key')
+            ->toArray();
+    } catch (\Exception $e) {
+        // Fallback: Jika kolom 'content' tidak ada, coba pakai kolom 'isi' atau kembalikan array kosong
+        try {
+            $sejarahData = \DB::table('sections')
+                ->where('page', 'sejarah')
+                ->pluck('isi', 'key')
+                ->toArray();
+        } catch (\Exception $ex) {
+            $sejarahData = [];
+        }
     }
+
+    return view('sejarah', compact('sejarahData'));
+}
+
 
     public function visimisi()
     {

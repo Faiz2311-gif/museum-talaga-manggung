@@ -47,17 +47,19 @@ $logout = function (Logout $logout) {
 
 
         <!-- 2. Sejarah -->
-        <a href="{{ route('admin.sejarah') }}" wire:navigate 
-           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
-                  {{ request()->routeIs('admin.sejarah') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
-            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.sejarah') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-            </svg>
-            {{ __('Sejarah') }}
-        </a>
+        <a href="{{ route('admin.sejarah.index') }}" wire:navigate 
+   class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+          {{ request()->routeIs('admin.sejarah*') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+    <!-- Ikon Buku Sejarah Sejajar -->
+    <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.sejarah*') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+    </svg>
+    {{ __('Sejarah') }}
+</a>
+
 
         <!-- 3. Visi & Misi -->
-        <a href="{{ route('admin.visimisi') }}" wire:navigate 
+        <a href="{{ route('admin.visimisi.index') }}" wire:navigate 
            class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
                   {{ request()->routeIs('admin.visimisi') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
             <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.visimisi') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

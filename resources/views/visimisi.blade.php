@@ -89,11 +89,64 @@
 
     <!-- 2. KONTEN UTAMA: GALERI (Gaya Google Images) -->
     <!-- PERBAIKAN: Mengubah background utama menjadi warna krem hangat (#fdfbf2) -->
-<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 bg-[#fdfbf2]">
+<main class="flex-grow max-w-4xl w-full mx-auto px-6 py-12 bg-[#fdfbf2] font-sans">
+    
+    <!-- Bagian Judul dan Abstrak Visi Misi -->
+    <div class="text-center mb-12 flex flex-col items-center" data-aos="fade-down" data-aos-duration="800">
+        <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-bold tracking-wider px-4 py-1.5 rounded-full mb-4 uppercase">
+            Arah & Komitmen
+        </span>
+        <h1 class="text-3xl md:text-5xl font-black text-amber-800 tracking-tight leading-tight">
+            {{ $visimisiData['visimisi_title'] ?? 'Visi & Misi Institut' }}
+        </h1>
+        <p class="mt-4 text-stone-600 text-sm md:text-base leading-relaxed max-w-2xl italic">
+            "{{ $visimisiData['visimisi_subtitle'] ?? 'Panduan strategis dalam melestarikan warisan leluhur dan mengedukasi generasi masa depan.' }}"
+        </p>
+        <div class="h-0.5 w-16 bg-amber-600 rounded-full mt-6"></div>
+    </div>
 
-    Halaman Placeholder
+    <!-- Wadah Konten Utama -->
+    <div class="space-y-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+        
+        <!-- Gambar Utama (Kondisional) -->
+        @if(!empty($visimisiData['visimisi_image']))
+            <div class="w-full mb-8 overflow-hidden rounded-xl border border-amber-200/40 shadow-sm bg-white p-2">
+                <img src="{{ asset('storage/' . $visimisiData['visimisi_image']) }}" 
+                     alt="{{ $visimisiData['visimisi_title'] }}" 
+                     class="w-full h-auto max-h-[380px] object-cover rounded-lg transition-transform duration-700 hover:scale-105">
+            </div>
+        @endif
+        
+        <!-- Grid Pemisah Visi & Misi -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            
+            <!-- Kotak Visi -->
+            <div class="bg-white border border-amber-200/60 rounded-2xl p-8 shadow-sm flex flex-col">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 font-bold text-sm">V</span>
+                    <h2 class="text-xl font-black text-amber-800 tracking-tight">Visi Kami</h2>
+                </div>
+                <p class="text-stone-700 text-sm leading-relaxed text-justify whitespace-pre-line flex-grow">
+                    {{ $visimisiData['visimisi_visi'] ?? 'Pernyataan visi utama belum dikonfigurasi oleh pihak manajemen admin melalui panel kontrol dashboard.' }}
+                </p>
+            </div>
+
+            <!-- Kotak Misi -->
+            <div class="bg-white border border-amber-200/60 rounded-2xl p-8 shadow-sm flex flex-col">
+                <div class="flex items-center gap-3 mb-4">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-amber-100 text-amber-800 font-bold text-sm">M</span>
+                    <h2 class="text-xl font-black text-amber-800 tracking-tight">Misi Kami</h2>
+                </div>
+                <div class="text-stone-700 text-sm leading-relaxed text-justify whitespace-pre-line flex-grow bullet-list-fix">
+                    {{ $visimisiData['visimisi_misi'] ?? 'Butir-butir penunjang misi utama belum dikonfigurasi oleh pihak manajemen admin melalui panel kontrol dashboard.' }}
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </main>
+
 
 
 
