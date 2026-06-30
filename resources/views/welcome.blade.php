@@ -110,20 +110,20 @@
             <div class="mx-auto max-w-3xl text-center">
                 <!-- Elemen di dalam menggunakan delay agar muncul berurutan (Staggered) -->
                 <span data-aos="fade-down" data-aos-duration="800" data-aos-delay="200" class="inline-flex items-center rounded-full bg-amber-600/10 px-4 py-1.5 text-xs font-medium text-amber-800 ring-1 ring-inset ring-amber-600/20 mb-6">
-                    Sistem Profil Museum V1.0
+                    {{ $heroBadge }}
                 </span>
 
                 <h1 data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400" class="text-4xl md:text-6xl font-black tracking-tight text-stone-900 sm:text-7xl leading-[1.15]">
-                    Melestarikan Sejarah Lewat <span class="text-amber-700">Arsip Digital</span>
+                    {!! str_replace('Arsip Digital', '<span class="text-amber-700">Arsip Digital</span>', $heroTitle) !!}
                 </h1>
 
                 <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600" class="mt-8 text-lg font-normal text-stone-600 sm:text-xl/8">
-                    Selamat datang di konsep portal digital museum kami. Antarmuka ini menghubungkan keindahan tata letak galeri sejarah dengan sistem manajemen data yang modern dan aman.
+                    {{ $heroDescription }}
                 </p>
 
                 <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="800" class="mt-10 flex items-center justify-center gap-x-6">
-                    <a href="#pameran" class="rounded-lg bg-amber-700 px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-amber-600 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">Jelajahi Galeri</a>
-                    <a href="#tentang" class="text-base font-semibold text-stone-700 hover:text-amber-700 transition">Latar Belakang Instansi <span aria-hidden="true">→</span></a>
+                    <a href="#pameran" class="rounded-lg bg-amber-700 px-6 py-3.5 text-base font-semibold text-white shadow-md hover:bg-amber-600 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">{{ $heroPrimaryButton }}</a>
+                    <a href="#tentang" class="text-base font-semibold text-stone-700 hover:text-amber-700 transition">{{ $heroSecondaryButton }} <span aria-hidden="true">→</span></a>
                 </div>
             </div>
         </div>
@@ -136,13 +136,8 @@
                 <!-- Konten teks bergeser sedikit -->
                 <div data-aos="fade-right" data-aos-duration="800" data-aos-delay="300">
                     <h2 class="text-base font-semibold text-amber-700 tracking-wide uppercase">Sejarah Yayasan</h2>
-                    <p class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">Tentang Lembaga Kami</p>
-                    <p class="mt-6 text-base text-stone-600 leading-7">
-                        Didirikan dengan misi utama untuk mengatalogkan, menjaga, dan menampilkan berbagai pencapaian budaya serta sejarah penting. Institusi fisik kami mengelola dokumen arsip berharga, artefak kuno, dan aset multimedia.
-                    </p>
-                    <p class="mt-4 text-base text-stone-600 leading-7">
-                        Portal web ini berfungsi sebagai wadah visual untuk menyajikan koleksi pameran kepada publik, sekaligus memudahkan petugas admin yang sah untuk memperbarui data katalog secara langsung.
-                    </p>
+                    <p class="mt-2 text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ $aboutTitle }}</p>
+                    <p class="mt-6 text-base text-stone-600 leading-7">{{ $aboutDescription }}</p>
                 </div>
                 <!-- Gambar/Mockup masuk dari kanan -->
                 <div data-aos="fade-left" data-aos-duration="800" data-aos-delay="500" class="bg-amber-100 border border-amber-200 rounded-2xl h-80 flex items-center justify-center text-amber-800/60 italic shadow-sm hover:shadow-md transition-shadow duration-300">
@@ -153,35 +148,42 @@
     </section>
 
     <!-- 4. BAGIAN KOLEKSI PAMERAN (Menggunakan Efek Slide Up) -->
-    <section id="pameran" data-aos="slide-up" data-aos-duration="1000" class="py-24 border-b border-amber-200">
-        <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" class="mx-auto max-w-2xl text-center mb-16">
-                <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">Koleksi Unggulan</h2>
-                <p class="mt-4 text-stone-600">Berikut adalah beberapa kategori galeri utama yang saat ini dikelola di dalam sistem basis data kami.</p>
-            </div>
-
-            <!-- Grid Kartu dengan efek transisi bergantian -->
-            <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                <div data-aos="fade-up" data-aos-duration="600" data-aos-delay="400" class="bg-white border border-amber-200 rounded-xl overflow-hidden p-6 hover:border-amber-500/50 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 transform">
-                    <div class="bg-amber-50 rounded-lg h-44 mb-6 flex items-center justify-center text-amber-800/40">Pratinjau Gambar</div>
-                    <h3 class="text-xl font-bold text-stone-900">Era Artefak Kuno</h3>
-                    <p class="mt-3 text-sm text-stone-600 leading-6">Kumpulan katalog arkeologi fisik bersejarah yang disimpan dengan aman di dalam ruang penyimpanan sayap barat.</p>
-                </div>
-
-                <div data-aos="fade-up" data-aos-duration="600" data-aos-delay="550" class="bg-white border border-amber-200 rounded-xl overflow-hidden p-6 hover:border-amber-500/50 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 transform">
-                    <div class="bg-amber-50 rounded-lg h-44 mb-6 flex items-center justify-center text-amber-800/40">Pratinjau Gambar</div>
-                    <h3 class="text-xl font-bold text-stone-900">Dokumen Kerangka Pendirian</h3>
-                    <p class="mt-3 text-sm text-stone-600 leading-6">Log arsip piagam asli lembaga, cetak biru bangunan lama, dan rekaman media sejarah pendiri awal.</p>
-                </div>
-
-                <div data-aos="fade-up" data-aos-duration="600" data-aos-delay="700" class="bg-white border border-amber-200 rounded-xl overflow-hidden p-6 hover:border-amber-500/50 transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1 transform">
-                    <div class="bg-amber-50 rounded-lg h-44 mb-6 flex items-center justify-center text-amber-800/40">Pratinjau Gambar</div>
-                    <h3 class="text-xl font-bold text-stone-900">Galeri Seni Visual</h3>
-                    <p class="mt-3 text-sm text-stone-600 leading-6">Dokumentasi digital karya seni rupa, lukisan klasik, dan potret peninggalan budaya wilayah Talaga.</p>
-                </div>
-            </div>
+<section id="pameran" data-aos="slide-up" data-aos-duration="1000" class="py-24 border-b border-amber-200">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" class="mx-auto max-w-2xl text-center mb-16">
+            <h2 class="text-3xl font-bold tracking-tight text-stone-900 sm:text-4xl">{{ $cardsSectionTitle }}</h2>
+            <p class="mt-4 text-stone-600">{{ $cardsSectionDescription }}</p>
         </div>
-    </section>
+
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            @forelse($homeCards ?? [] as $card)
+                <a href="{{ $card->resolved_target_url ?? url('/') }}" class="group block rounded-xl border border-amber-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50 hover:shadow-md">
+                    
+                    <!-- Pratinjau Foto atau Icon Gambar Kartu dari Storage -->
+                    <div class="mb-6 flex h-44 items-center justify-center rounded-lg bg-amber-50 overflow-hidden border border-amber-100/60">
+                        @if($card->icon_or_image)
+                            <img src="{{ asset('storage/' . $card->icon_or_image) }}" alt="{{ $card->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        @else
+                            <!-- Placeholder jika admin tidak mengunggah gambar -->
+                            <svg class="h-12 w-12 text-amber-800/30" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                        @endif
+                    </div>
+
+                    <!-- Judul & Deskripsi Kartu (Disesuaikan dengan Properti Model Database) -->
+                    <h3 class="text-xl font-bold text-stone-900 group-hover:text-amber-700 transition-colors">{{ $card->title }}</h3>
+                    <p class="mt-3 text-sm leading-6 text-stone-600 line-clamp-3">{{ $card->description ?: 'Lihat detail konten terkait di halaman ini.' }}</p>
+                </a>
+            @empty
+                <div class="sm:col-span-2 lg:col-span-3 rounded-xl border border-dashed border-amber-200 bg-amber-50/50 p-8 text-center text-stone-600">
+                    Belum ada kartu beranda yang ditambahkan. Anda dapat menambahkannya dari menu admin.
+                </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
 
 </main>
 

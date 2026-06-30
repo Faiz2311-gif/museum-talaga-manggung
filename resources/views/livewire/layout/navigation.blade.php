@@ -36,14 +36,15 @@ $logout = function (Logout $logout) {
         </a>
 
         <!-- 1. Beranda -->
-        <a href="{{ route('admin.beranda') }}" wire:navigate 
-           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
-                  {{ request()->routeIs('admin.beranda') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
-            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.beranda') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-            </svg>
-            {{ __('Beranda') }}
-        </a>
+        <a href="{{ route('admin.beranda.index') }}" wire:navigate 
+   class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+          {{ request()->routeIs('admin.beranda*') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+    <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.beranda*') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+    </svg>
+    {{ __('Beranda') }}
+</a>
+
 
         <!-- 2. Sejarah -->
         <a href="{{ route('admin.sejarah') }}" wire:navigate 

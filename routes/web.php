@@ -7,7 +7,7 @@ use App\Http\Controllers\GaleriController;
 
 
 // Halaman Utama Publik
-Route::view('/', 'welcome');
+Route::get('/', [HalamanController::class, 'index'])->name('welcome');
 
 // Route untuk halaman berita
 Route::get('/berita', [HalamanController::class, 'berita'])->name('berita');
@@ -42,10 +42,23 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ->name('profile');
 
     // 3. Mengarah ke views/admin/adm-beranda.blade.php (Halaman Baru Anda)
-    Route::view('beranda', 'admin.admberanda')
-    ->middleware(['verified'])
-    ->name('admin.beranda');
+    Route::get('beranda', [App\Http\Controllers\HomeSectionController::class, 'index'])
+        ->middleware(['verified'])
+        ->name('admin.beranda.index');
 
+    Route::post('beranda/update', [App\Http\Controllers\HomeSectionController::class, 'update'])
+        ->middleware(['verified'])
+        ->name('admin.beranda.update');
+    Route::resource('home-cards', App\Http\Controllers\HomeCardController::class)
+        ->names([
+            'index' => 'admin.home-cards.index',
+            'create' => 'admin.home-cards.create',
+            'store' => 'admin.home-cards.store',
+            'edit' => 'admin.home-cards.edit',
+            'update' => 'admin.home-cards.update',
+            'destroy' => 'admin.home-cards.destroy',
+        ])
+        ->middleware(['auth', 'verified']);
     // 4. Mengarah ke views/admin/admsejarah.blade.php (Halaman Sejarah Admin)
     Route::view('sejarah', 'admin.admsejarah')
         ->middleware(['verified'])
