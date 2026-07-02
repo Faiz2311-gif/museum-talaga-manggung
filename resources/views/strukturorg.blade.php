@@ -88,12 +88,33 @@
         </div>
     </header>
 
-    <!-- 2. KONTEN UTAMA: GALERI (Gaya Google Images) -->
-    <!-- PERBAIKAN: Mengubah background utama menjadi warna krem hangat (#fdfbf2) -->
+    <!-- 2. KONTEN UTAMA -->
 <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 bg-[#fdfbf2]">
+    <div class="mx-auto max-w-6xl space-y-6">
+        <div class="rounded-3xl border border-amber-200 bg-white p-8 shadow-sm">
+            <p class="mb-3 inline-flex rounded-full bg-amber-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-700">
+                Struktur Organisasi
+            </p>
+            <h1 class="text-3xl font-black tracking-tight text-stone-900">Susunan jabatan dan staf museum</h1>
+            <p class="mt-3 max-w-3xl text-sm leading-6 text-stone-600">
+                Bagian ini menampilkan hirarki organisasi yang dikelola melalui panel admin, sehingga perubahan jabatan akan tampil langsung di halaman publik.
+            </p>
+        </div>
 
-    Halaman Placeholder
-
+        <div class="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm">
+            @if ($positions->isEmpty())
+                <div class="rounded-2xl border border-dashed border-stone-300 bg-stone-50 p-8 text-center text-sm text-stone-600">
+                    Belum ada data struktur organisasi yang tersedia.
+                </div>
+            @else
+                <div class="space-y-5">
+                    @foreach ($positions as $position)
+                        @include('partials.public-org-node', ['position' => $position])
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </div>
 </main>
 
 

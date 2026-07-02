@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\HomeCard; // <-- WAJIB TAMBAHKAN BARIS INI
+use App\Models\HomeCard;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class HalamanController extends Controller
@@ -80,7 +81,13 @@ class HalamanController extends Controller
 
     public function strukturorg()
     {
-        return view('strukturorg');
+        $positions = Position::query()
+            ->with(['parent', 'children' => fn ($query) => $query->orderBy('name')])
+            ->whereNull('parent_id')
+            ->orderBy('name')
+            ->get();
+
+        return view('strukturorg', compact('positions'));
     }
 
     public function walangsuji()

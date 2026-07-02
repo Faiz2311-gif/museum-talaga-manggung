@@ -8,6 +8,7 @@ use App\Http\Controllers\SejarahAdminController;
 use App\Http\Controllers\VisiMisiAdminController;
 use App\Http\Controllers\HomeSectionController;
 use App\Http\Controllers\HomeCardController;
+use App\Livewire\OrganizationManager;
 
 
 // Halaman Utama Publik
@@ -73,9 +74,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 
     // 6. Mengarah ke views/admin/admstog.blade.php (Halaman Struktur Organisasi Admin)
-    Route::view('strukturorg', 'admin.admstog')
+    Route::get('strukturorg', function () {
+        return view('admin.strukturorg.index');
+    })->middleware(['verified'])->name('admin.strukturorg');
+
+    Route::get('strukturorg/livewire', OrganizationManager::class)
         ->middleware(['verified'])
-        ->name('admin.strukturorg');
+        ->name('admin.strukturorg.livewire');
 
     // 7. Mengarah ke views/admin/admgaleri.blade.php (Halaman Galeri Admin)
     Route::get('galeri-admin', [App\Http\Controllers\GaleriController::class, 'adminIndex'])
