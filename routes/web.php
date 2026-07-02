@@ -53,6 +53,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::post('beranda/update', [App\Http\Controllers\HomeSectionController::class, 'update'])
         ->middleware(['verified'])
         ->name('admin.beranda.update');
+
     Route::resource('home-cards', App\Http\Controllers\HomeCardController::class)
         ->names([
             'index' => 'admin.home-cards.index',
@@ -63,23 +64,13 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             'destroy' => 'admin.home-cards.destroy',
         ])
         ->middleware(['auth', 'verified']);
-    // 4. Mengarah ke views/admin/admsejarah.blade.php (Halaman Sejarah Admin)
-    // Cukup buat satu grup utama untuk panel admin di file web.php Anda
-Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    // Menampilkan Halaman Utama & Mengontrol Form Edit/Create
-    Route::get('/sejarah', [SejarahAdminController::class, 'index'])->name('sejarah.index');
-    
-    // Menyimpan / Memperbarui Data ke Database
-    Route::post('/sejarah/update', [SejarahAdminController::class, 'update'])->name('sejarah.update');
-});
 
-
-
-    // 5. Mengarah ke views/admin/admvisimisi.blade.php (Halaman Visi & Misi Admin)
-    Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/visimisi', [VisiMisiAdminController::class, 'index'])->name('visimisi.index');
-    Route::post('/visimisi/update', [VisiMisiAdminController::class, 'update'])->name('visimisi.update');
-});
+    Route::middleware(['auth', 'verified'])->name('admin.')->group(function () {
+        Route::get('sejarah', [SejarahAdminController::class, 'index'])->name('sejarah.index');
+        Route::post('sejarah/update', [SejarahAdminController::class, 'update'])->name('sejarah.update');
+        Route::get('visimisi', [VisiMisiAdminController::class, 'index'])->name('visimisi.index');
+        Route::post('visimisi/update', [VisiMisiAdminController::class, 'update'])->name('visimisi.update');
+    });
 
     // 6. Mengarah ke views/admin/admstog.blade.php (Halaman Struktur Organisasi Admin)
     Route::view('strukturorg', 'admin.admstog')
@@ -88,31 +79,39 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     // 7. Mengarah ke views/admin/admgaleri.blade.php (Halaman Galeri Admin)
     Route::get('galeri-admin', [App\Http\Controllers\GaleriController::class, 'adminIndex'])
-    ->middleware(['auth', 'verified'])
-    ->name('admin.galeri.index');
+        ->middleware(['auth', 'verified'])
+        ->name('admin.galeri.index');
 
-// 4. BARU: Rute otomatis untuk seluruh fungsi CRUD Galeri Admin (Terhubung ke GaleriController)
-// URL otomatis menjadi: /admin/galeri, /admin/galeri/create, dll.
-Route::resource('galeri', App\Http\Controllers\GaleriController::class)
-    ->names([
-        'index'   => 'admin.galeri.index',
-        'create'  => 'admin.galeri.create',
-        'store'   => 'admin.galeri.store',
-        'edit'    => 'admin.galeri.edit',
-        'update'  => 'admin.galeri.update',
-        'destroy' => 'admin.galeri.destroy',
-    ])
-    ->middleware(['auth', 'verified']);
+    // 4. BARU: Rute otomatis untuk seluruh fungsi CRUD Galeri Admin (Terhubung ke GaleriController)
+    // URL otomatis menjadi: /admin/galeri, /admin/galeri/create, dll.
+    Route::resource('galeri', App\Http\Controllers\GaleriController::class)
+        ->names([
+            'index'   => 'admin.galeri.index',
+            'create'  => 'admin.galeri.create',
+            'store'   => 'admin.galeri.store',
+            'edit'    => 'admin.galeri.edit',
+            'update'  => 'admin.galeri.update',
+            'destroy' => 'admin.galeri.destroy',
+        ])
+        ->middleware(['auth', 'verified']);
 
     // Mengarah ke Controller untuk menangani tampilan tabel CRUD berita admin
-Route::get('berita-admin', [App\Http\Controllers\BeritaController::class, 'adminIndex'])
-    ->middleware(['auth', 'verified'])
-    ->name('admin.berita.index');
+    Route::get('berita-admin', [App\Http\Controllers\BeritaController::class, 'adminIndex'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.berita.index');
 
     // 10. Rute otomatis untuk seluruh fungsi CRUD Berita Admin
     // URL otomatis menjadi: /admin/berita, /admin/berita/create, dll.
     Route::resource('berita', App\Http\Controllers\BeritaController::class)
-        ->middleware(['verified']);
+        ->middleware(['verified'])
+        ->names([
+            'index' => 'admin.berita.index',
+            'create' => 'admin.berita.create',
+            'store' => 'admin.berita.store',
+            'edit' => 'admin.berita.edit',
+            'update' => 'admin.berita.update',
+            'destroy' => 'admin.berita.destroy',
+        ]);
 
     // 5. Rute Placeholder Dinamis untuk Menu Lain yang Belum Dibuat Filenya
     Route::get('modul/{menu}', function ($menu) {
