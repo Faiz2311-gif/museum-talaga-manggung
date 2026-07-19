@@ -136,42 +136,7 @@
 
 
             <!-- Item Foto 3 -->
-<footer class="bg-[#1c1917] text-stone-400 text-xs py-12 border-t border-stone-800 font-sans mt-auto w-full overflow-hidden">
-    <!-- Membungkus isi dengan wadah maksimal max-w-7xl dan menambahkan padding x-6 yang aman -->
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-
-        <!-- KOLOM 1: Informasi Instansi & Hak Cipta -->
-        <div class="flex flex-col justify-between space-y-2">
-            <div>
-                <h3 class="text-white font-serif font-black text-sm tracking-tight mb-2">Museum Talaga Manggung</h3>
-                <p class="text-stone-500 leading-relaxed text-[11px]">Wadah pelestarian benda pusaka, manuskrip kuno, dan rekam jejak sejarah peradaban institusi.</p>
-            </div>
-            <p class="text-stone-600 pt-4 md:pt-0">&copy; 2026 Hak Cipta Dilindungi.</p>
-        </div>
-
-        <!-- KOLOM 2: Navigasi Tautan Cepat -->
-        <div class="flex flex-col space-y-2.5">
-            <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Akses Pintasan</h4>
-            <div class="grid grid-cols-2 gap-x-4 gap-y-2 max-w-xs mx-auto md:mx-0 text-left">
-                {{-- <a href="{{ url('/') }}" class="hover:text-white hover:underline transition">Beranda</a>
-                <a href="{{ route('berita') }}" class="hover:text-white hover:underline transition">Berita</a>
-                <a href="{{ url('/#pameran') }}" class="hover:text-white hover:underline transition">Galeri</a>
-                <a href="{{ route('kegiatan') }}" class="hover:text-white hover:underline transition">Kegiatan</a> --}}
-            </div>
-        </div>
-
-        <!-- KOLOM 3: Legalitas & Dokumen Kebijakan -->
-        <div class="flex flex-col space-y-2.5">
-            <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Informasi Hukum</h4>
-            <ul class="space-y-2">
-                <li><a href="#" class="hover:text-white transition">Kebijakan Privasi</a></li>
-                <li><a href="#" class="hover:text-white transition">Syarat & Ketentuan Penggunaan</a></li>
-                <li><a href="#" class="hover:text-white transition">Bantuan & Kontak Resmi</a></li>
-            </ul>
-        </div>
-
-    </div>
-</footer>
+<x-site-footer />
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {

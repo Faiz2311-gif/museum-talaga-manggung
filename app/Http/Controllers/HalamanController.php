@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\HomeCard;
+use App\Models\GosaliVideo;
 use App\Models\Position;
+use App\Models\Visimisi;
+use App\Models\WalangSujiVideo;
 use Illuminate\Http\Request;
 
 class HalamanController extends Controller
@@ -21,6 +24,14 @@ class HalamanController extends Controller
         $cardsSectionTitle = \App\Models\HomeSection::value('cards_section_title', 'Koleksi Unggulan');
         $cardsSectionDescription = \App\Models\HomeSection::value('cards_section_description', 'Pilih bagian yang ingin Anda jelajahi dari halaman beranda ini.');
 
+        $footerCol1Title = \App\Models\HomeSection::value('footer_col1_title', 'Museum Talaga Manggung');
+        $footerCol1Text = \App\Models\HomeSection::value('footer_col1_text', 'Wadah pelestarian benda pusaka, manuskrip kuno, dan rekam jejak sejarah peradaban institusi.');
+        $footerCol1Copyright = \App\Models\HomeSection::value('footer_col1_copyright', '© 2026 Hak Cipta Dilindungi.');
+        $footerCol2Title = \App\Models\HomeSection::value('footer_col2_title', 'Akses Pintasan');
+        $footerCol2Links = \App\Models\HomeSection::value('footer_col2_links', "Beranda|/\nBerita|/berita\nGaleri|/galeri");
+        $footerCol3Title = \App\Models\HomeSection::value('footer_col3_title', 'Informasi Hukum');
+        $footerCol3Links = \App\Models\HomeSection::value('footer_col3_links', "Kebijakan Privasi|#\nSyarat & Ketentuan Penggunaan|#\nBantuan & Kontak Resmi|#");
+
         return view('welcome', compact(
             'homeCards',
             'heroBadge',
@@ -31,7 +42,14 @@ class HalamanController extends Controller
             'aboutTitle',
             'aboutDescription',
             'cardsSectionTitle',
-            'cardsSectionDescription'
+            'cardsSectionDescription',
+            'footerCol1Title',
+            'footerCol1Text',
+            'footerCol1Copyright',
+            'footerCol2Title',
+            'footerCol2Links',
+            'footerCol3Title',
+            'footerCol3Links'
         ));
     }
 
@@ -76,7 +94,17 @@ class HalamanController extends Controller
 
     public function visimisi()
     {
-        return view('visimisi');
+        $visimisi = Visimisi::first();
+
+        $visimisiData = $visimisi ? [
+            'visimisi_title' => $visimisi->title,
+            'visimisi_subtitle' => $visimisi->subtitle,
+            'visimisi_image' => $visimisi->image,
+            'visimisi_visi' => $visimisi->visi,
+            'visimisi_misi' => $visimisi->misi,
+        ] : [];
+
+        return view('visimisi', compact('visimisiData'));
     }
 
     public function strukturorg()
@@ -92,11 +120,15 @@ class HalamanController extends Controller
 
     public function walangsuji()
     {
-        return view('walangsuji');
+        $videos = WalangSujiVideo::orderBy('sort_order')->orderBy('id')->get();
+
+        return view('walangsuji', compact('videos'));
     }
 
     public function gosali()
     {
-        return view('gosali');
+        $videos = GosaliVideo::orderBy('sort_order')->orderBy('id')->get();
+
+        return view('gosali', compact('videos'));
     }
 }

@@ -8,6 +8,9 @@ use App\Http\Controllers\SejarahAdminController;
 use App\Http\Controllers\VisiMisiAdminController;
 use App\Http\Controllers\HomeSectionController;
 use App\Http\Controllers\HomeCardController;
+use App\Http\Controllers\WalangSujiController;
+use App\Http\Controllers\GosaliVideoController;
+use App\Http\Controllers\FooterController;
 use App\Livewire\OrganizationManager;
 
 
@@ -66,6 +69,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ])
         ->middleware(['auth', 'verified']);
 
+    Route::get('footer', [FooterController::class, 'index'])
+        ->middleware(['verified'])
+        ->name('admin.footer.index');
+
+    Route::post('footer/update', [FooterController::class, 'update'])
+        ->middleware(['verified'])
+        ->name('admin.footer.update');
+
     Route::middleware(['auth', 'verified'])->name('admin.')->group(function () {
         Route::get('sejarah', [SejarahAdminController::class, 'index'])->name('sejarah.index');
         Route::post('sejarah/update', [SejarahAdminController::class, 'update'])->name('sejarah.update');
@@ -105,6 +116,59 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ->middleware(['auth', 'verified'])
         ->name('admin.berita.index');
 
+// Rute untuk halaman utama manajemen Walang Suji di Panel Admin
+Route::get('walangsuji-admin', [App\Http\Controllers\WalangSujiController::class, 'index'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.walangsuji.index');
+
+// Rute untuk memproses penyimpanan video baru
+Route::post('walangsuji-admin/store', [App\Http\Controllers\WalangSujiController::class, 'store'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.walangsuji.store');
+
+// Rute untuk menampilkan halaman edit video
+Route::get('walangsuji-admin/{id}/edit', [App\Http\Controllers\WalangSujiController::class, 'edit'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.walangsuji.edit');
+
+// Rute untuk memperbarui video
+Route::put('walangsuji-admin/{id}', [App\Http\Controllers\WalangSujiController::class, 'update'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.walangsuji.update');
+
+// Rute untuk menghapus video
+Route::delete('walangsuji-admin/{id}', [App\Http\Controllers\WalangSujiController::class, 'destroy'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.walangsuji.destroy');
+
+// Rute untuk mengatur ulang urutan playlist dengan drag-and-drop
+Route::post('walangsuji-admin/reorder', [App\Http\Controllers\WalangSujiController::class, 'reorder'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.walangsuji.reorder');
+
+Route::get('gosali-admin', [GosaliVideoController::class, 'index'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.gosali.index');
+
+Route::post('gosali-admin/store', [GosaliVideoController::class, 'store'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.gosali.store');
+
+Route::get('gosali-admin/{id}/edit', [GosaliVideoController::class, 'edit'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.gosali.edit');
+
+Route::put('gosali-admin/{id}', [GosaliVideoController::class, 'update'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.gosali.update');
+
+Route::delete('gosali-admin/{id}', [GosaliVideoController::class, 'destroy'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.gosali.destroy');
+
+Route::post('gosali-admin/reorder', [GosaliVideoController::class, 'reorder'])
+        ->middleware(['auth', 'verified'])
+        ->name('admin.gosali.reorder');
     // 10. Rute otomatis untuk seluruh fungsi CRUD Berita Admin
     // URL otomatis menjadi: /admin/berita, /admin/berita/create, dll.
     Route::resource('berita', App\Http\Controllers\BeritaController::class)

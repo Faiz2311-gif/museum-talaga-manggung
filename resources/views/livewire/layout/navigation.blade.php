@@ -61,8 +61,8 @@ $logout = function (Logout $logout) {
         <!-- 3. Visi & Misi -->
         <a href="{{ route('admin.visimisi.index') }}" wire:navigate 
            class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
-                  {{ request()->routeIs('admin.visimisi') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
-            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.visimisi') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  {{ request()->routeIs('admin.visimisi*') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.visimisi*') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             {{ __('Visi & Misi') }}
@@ -98,14 +98,31 @@ $logout = function (Logout $logout) {
     </svg>
     {{ __('Berita') }}
 </a>
-    </div>
 
-    <!-- Bagian Bawah: Informasi Akun & Dropdown Pengaturan -->
-    <div class="border-t border-stone-100 p-4 bg-stone-50/50">
-        <!-- 
-            PERBAIKAN UTAMA: 
-            Mengubah `align="top"` menjadi `align="top-left"` agar posisi melayang box menu berada di sisi kanan sidebar.
-            Menambahkan class kustom Tailwind `relative` untuk memastikan koordinat pembungkus terjaga.
+<a href="{{ route('admin.gosali.index') }}" wire:navigate
+                   class="sidebar-item group flex items-center rounded-xl px-3 py-2.5 text-sm font-semibold transition-all duration-200 {{ request()->routeIs('admin.gosali*') ? 'border-l-4 border-amber-600 bg-amber-50 pl-2.5 text-amber-700' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+                    <svg class="sidebar-icon h-5 w-5 shrink-0 {{ request()->routeIs('admin.gosali*') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V5.25a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5Zm3 2.25h7.5m-7.5 4.5h7.5m-7.5 4.5h4.5" />
+                    </svg>
+                    <span class="sidebar-label ml-3">{{ __('Gosali') }}</span>
+                </a>
+
+<a href="{{ route('admin.walangsuji.index') }}" wire:navigate
+                   class="sidebar-item group flex items-center rounded-xl px-3 py-2.5 text-sm font-semibold transition-all duration-200 {{ request()->routeIs('admin.walangsuji*') ? 'border-l-4 border-amber-600 bg-amber-50 pl-2.5 text-amber-700' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+                    <svg class="sidebar-icon h-5 w-5 shrink-0 {{ request()->routeIs('admin.walangsuji*') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25v13.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5V5.25a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5Zm3 2.25h7.5m-7.5 4.5h7.5m-7.5 4.5h4.5" />
+                    </svg>
+                    <span class="sidebar-label ml-3">{{ __('Walangsuji') }}</span>
+                </a>
+
+        <a href="{{ route('admin.footer.index') }}" wire:navigate 
+           class="group flex items-center px-3 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 
+                  {{ request()->routeIs('admin.footer*') ? 'bg-amber-50 text-amber-700 border-l-4 border-amber-600 pl-2.5' : 'text-stone-600 hover:bg-stone-50 hover:text-amber-700' }}">
+            <svg class="mr-3 h-5 w-5 shrink-0 {{ request()->routeIs('admin.footer*') ? 'text-amber-600' : 'text-stone-400 group-hover:text-amber-600' }}" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            {{ __('Footer') }}
+        </a>
         -->
         <x-dropdown align="top-left" width="48" class="w-full relative">
             <x-slot name="trigger">

@@ -17,18 +17,10 @@
     <!-- PERBAIKAN: Mengunci warna dasar body menggunakan warna krem museum agar tidak ada bocor hitam -->
     <body class="font-sans antialiased bg-[#fdfbf2]">
         
-        <!-- PERBAIKAN: Mengganti bg-gray-100 dan dark:bg-gray-900 dengan warna krem hangat museum -->
         <div class="min-h-screen bg-[#fdfbf2]">
-            
-            <!-- Komponen Navigasi (Sekarang bertindak sebagai Sidebar Kiri) -->
             <livewire:layout.navigation />
 
-            <!-- 
-                PERBAIKAN UTAMA: 
-                Membungkus seluruh konten utama (Header & Slot) ke dalam div dengan kelas `pl-64`.
-                Ini bertujuan agar konten otomatis bergeser ke kanan dan tidak tertabrak oleh Sidebar.
-            -->
-            <div class="pl-64 transition-all duration-300">
+            <div id="adminMainContent" class="pl-64 transition-all duration-300">
                 
                 <!-- Page Heading (Opsional, sudah dibersihkan dari warna gelap bawaan) -->
                 @if (isset($header))

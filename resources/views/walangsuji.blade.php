@@ -84,53 +84,155 @@
         </div>
     </header>
 
-    <!-- 2. KONTEN UTAMA: GALERI (Gaya Google Images) -->
-    <!-- PERBAIKAN: Mengubah background utama menjadi warna krem hangat (#fdfbf2) -->
-<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 bg-[#fdfbf2]">
+    <!-- 2. KONTEN UTAMA -->
 
-    Halaman Placeholder
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 bg-[#fdfbf2]">
+    
+    <!-- HEADER HALAMAN -->
+    <div class="mb-8">
+        <span class="text-xs font-bold tracking-widest text-amber-700 uppercase block mb-1">Living Museum</span>
+        <h1 class="text-3xl font-serif font-bold text-stone-900 tracking-tight flex items-center gap-3">
+            Walang Suji 
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 border border-amber-200">
+                🔴 Teater Digital
+            </span>
+        </h1>
+        <p class="text-sm text-stone-600 mt-2 max-w-3xl">
+            Saksikan rekonstruksi digital ritual, adat, dan warisan budaya adiluhung Kerajaan Talaga Manggung secara audiovisual interaktif.
+        </p>
+    </div>
 
+    <!-- TATA LETAK UTAMA (Gaya Pemutar Teater) -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- KOLOM KIRI: Pemutar Video & Detail Informasi (Lebar: 2/3) -->
+        <div class="lg:col-span-2 space-y-6">
+            
+            <!-- BINGKAI PEMUTAR MP4 -->
+            <div class="bg-stone-950 rounded-2xl overflow-hidden shadow-xl aspect-video relative border border-amber-900/10">
+                @if($videos->isNotEmpty())
+                    @php
+                        $firstVideo = $videos->first();
+                        $videoSource = $firstVideo->video_file_path ? asset('storage/' . $firstVideo->video_file_path) : ($firstVideo->video_url ?? '');
+                        $isYoutube = $videoSource && preg_match('#^(https?://)?(www\.)?(youtube\.com|youtu\.be)/#i', $videoSource);
+                        $youtubeEmbedUrl = '';
+                        if ($isYoutube) {
+                            $youtubeEmbedUrl = preg_replace('#^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/)([\w-]+).*#i', 'https://www.youtube.com/embed/$4', $videoSource);
+                        }
+                        $posterSource = $firstVideo->thumbnail_path ? asset('storage/' . $firstVideo->thumbnail_path) : 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80';
+                    @endphp
+                    @if($isYoutube)
+                        <iframe id="mainMuseumPlayer" class="w-full h-full" src="{{ $youtubeEmbedUrl }}" title="{{ $firstVideo->title }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    @else
+                        <video id="mainMuseumPlayer" class="w-full h-full object-contain" controls poster="{{ $posterSource }}">
+                            <source src="{{ $videoSource ?: 'https://www.w3schools.com/html/mov_bbb.mp4' }}" type="video/mp4">
+                            Browser Anda tidak mendukung pemutar video.
+                        </video>
+                    @endif
+                @else
+                    <div class="flex h-full w-full items-center justify-center bg-[radial-gradient(circle_at_top,_rgba(251,191,36,0.25),_transparent_60%)] p-6 text-center">
+                        <div>
+                            <div class="mb-3 text-4xl">🎞️</div>
+                            <h2 class="text-lg font-semibold text-amber-100">Belum ada konten video</h2>
+                            <p class="mt-2 text-sm text-stone-300">Konten akan muncul di sini setelah admin menambahkan video pertama.</p>
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            <!-- DETAIL ARSIP YANG SEDANG DIPUTAR -->
+            <div class="bg-white rounded-xl p-6 border border-amber-200/60 shadow-sm">
+                <div class="flex flex-wrap items-start justify-between gap-4 border-b border-stone-100 pb-4 mb-4">
+                    <div>
+                        <h2 id="currentVideoTitle" class="text-xl font-bold text-stone-900 font-serif">
+                            {{ $videos->first()->title ?? 'Belum ada konten yang dipilih' }}
+                        </h2>
+                        <div class="flex items-center gap-4 text-xs text-stone-500 mt-1">
+                            <span class="flex items-center gap-1">🕒 <span id="currentVideoDuration">{{ $videos->first()->duration ?? '00:00' }}</span></span>
+                            <span>•</span>
+                            <span class="flex items-center gap-1">👁️ 0 Dilihat</span>
+                        </div>
+                    </div>
+                    <!-- Tombol Interaksi Unduhan Dokumen -->
+                    <div class="flex items-center gap-2">
+                        <button class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-semibold px-4 py-2 rounded-lg transition">
+                            📥 Unduh Brosur (PDF)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Deskripsi Narasi Konten -->
+                <div>
+                    <h3 class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-2">Sinopsis / Catatan Budaya</h3>
+                    <p id="currentVideoDesc" class="text-sm text-stone-700 leading-relaxed">
+                        {{ $videos->first()->description ?? 'Tambahkan sinopsis untuk menampilkan narasi yang muncul di halaman publik.' }}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- KOLOM KANAN: Daftar Putar Dokumen (Lebar: 1/3) -->
+        <div class="space-y-4">
+            <div class="bg-white rounded-xl border border-amber-200/60 shadow-sm overflow-hidden">
+                
+                <!-- Kepala Bagian Playlist -->
+                <div class="bg-stone-900 text-amber-100 p-4 flex items-center justify-between">
+                    <div>
+                        <h3 class="font-bold text-sm tracking-wide">Daftar Babak Dokumenter</h3>
+                        <p class="text-xs text-stone-400">Koleksi Living Museum</p>
+                    </div>
+                    <span class="text-xs bg-amber-800/80 px-2.5 py-1 rounded font-mono">{{ $videos->count() }} Episode</span>
+                </div>
+
+                <!-- List Item Pilihan Video -->
+<div class="divide-y divide-stone-100 max-h-[480px] overflow-y-auto">
+    @forelse($videos as $video)
+        @php
+            $videoSource = $video->video_file_path ? asset('storage/' . $video->video_file_path) : ($video->video_url ?? '');
+            $posterSource = $video->thumbnail_path ? asset('storage/' . $video->thumbnail_path) : '';
+            $isYoutube = $videoSource && preg_match('#^(https?://)?(www\.)?(youtube\.com|youtu\.be)/#i', $videoSource);
+            $youtubeEmbedUrl = '';
+            if ($isYoutube) {
+                $youtubeEmbedUrl = preg_replace('#^(https?://)?(www\.)?(youtube\.com/watch\?v=|youtu\.be/)([\w-]+).*#i', 'https://www.youtube.com/embed/$4', $videoSource);
+            }
+        @endphp
+        <div onclick="playVideo(this, '{{ $videoSource }}', '{{ addslashes($video->title) }}', '{{ addslashes($video->description) }}', '{{ $video->duration }}', '{{ $posterSource }}', '{{ $youtubeEmbedUrl }}')"
+             class="w-full p-3.5 flex gap-3 cursor-pointer hover:bg-amber-50/50 transition items-start border-l-4 border-transparent group {{ $loop->first ? 'bg-amber-50/70 border-amber-600' : '' }}">
+            <div class="w-24 aspect-video bg-stone-800 rounded relative shrink-0 overflow-hidden border border-amber-200">
+                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                    <span class="text-amber-400 text-xs">{{ $loop->first ? '▶️ Aktif' : '▶️' }}</span>
+                </div>
+            </div>
+            <div class="min-w-0">
+                <h4 class="text-xs {{ $loop->first ? 'font-bold text-amber-900' : 'font-semibold text-stone-800' }} line-clamp-2">{{ $video->title }}</h4>
+                <span class="text-[10px] {{ $loop->first ? 'text-amber-700' : 'text-stone-500' }} mt-1 block font-medium">{{ $video->duration }}</span>
+            </div>
+        </div>
+    @empty
+        <div class="p-6 text-center text-sm text-stone-500">
+            <div class="mb-2 text-2xl">📭</div>
+            <p class="font-medium text-stone-700">Belum ada data video untuk ditampilkan.</p>
+        </div>
+    @endforelse
+</div>
+            </div>
+            
+            <!-- CATATAN INFOGRAFIS KECIL -->
+            <div class="p-4 bg-amber-100/40 rounded-xl border border-amber-200 text-xs text-amber-900">
+                <p class="font-bold mb-1">💡 Info Tambahan:</p>
+                <p class="text-stone-700 leading-relaxed">
+                    Setiap klip video di atas menyajikan rekonstruksi visual berbasis arsip sejarah resmi Museum Talaga Manggung.
+                </p>
+            </div>
+        </div>
+
+    </div>
 </main>
 
 
 
-            <!-- Item Foto 3 -->
-<footer class="bg-[#1c1917] text-stone-400 text-xs py-12 border-t border-stone-800 font-sans mt-auto w-full overflow-hidden">
-    <!-- Membungkus isi dengan wadah maksimal max-w-7xl dan menambahkan padding x-6 yang aman -->
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
 
-        <!-- KOLOM 1: Informasi Instansi & Hak Cipta -->
-        <div class="flex flex-col justify-between space-y-2">
-            <div>
-                <h3 class="text-white font-serif font-black text-sm tracking-tight mb-2">Museum Talaga Manggung</h3>
-                <p class="text-stone-500 leading-relaxed text-[11px]">Wadah pelestarian benda pusaka, manuskrip kuno, dan rekam jejak sejarah peradaban institusi.</p>
-            </div>
-            <p class="text-stone-600 pt-4 md:pt-0">&copy; 2026 Hak Cipta Dilindungi.</p>
-        </div>
-
-        <!-- KOLOM 2: Navigasi Tautan Cepat -->
-        <div class="flex flex-col space-y-2.5">
-            <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Akses Pintasan</h4>
-            <div class="grid grid-cols-2 gap-x-4 gap-y-2 max-w-xs mx-auto md:mx-0 text-left">
-                {{-- <a href="{{ url('/') }}" class="hover:text-white hover:underline transition">Beranda</a>
-                <a href="{{ route('berita') }}" class="hover:text-white hover:underline transition">Berita</a>
-                <a href="{{ url('/#pameran') }}" class="hover:text-white hover:underline transition">Galeri</a>
-                <a href="{{ route('kegiatan') }}" class="hover:text-white hover:underline transition">Kegiatan</a> --}}
-            </div>
-        </div>
-
-        <!-- KOLOM 3: Legalitas & Dokumen Kebijakan -->
-        <div class="flex flex-col space-y-2.5">
-            <h4 class="text-white font-semibold uppercase tracking-wider text-[11px] mb-1">Informasi Hukum</h4>
-            <ul class="space-y-2">
-                <li><a href="#" class="hover:text-white transition">Kebijakan Privasi</a></li>
-                <li><a href="#" class="hover:text-white transition">Syarat & Ketentuan Penggunaan</a></li>
-                <li><a href="#" class="hover:text-white transition">Bantuan & Kontak Resmi</a></li>
-            </ul>
-        </div>
-
-    </div>
-</footer>
+<x-site-footer />
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -177,4 +279,63 @@ window.addEventListener('click', function() {
         menu.classList.remove('opacity-100', 'visible', 'translate-y-0');
     });
 });
+
+// ==========================================
+// TAMBAHAN SCRIPT UNTUK PLAYLIST WALANG SUJI
+// ==========================================
+function playVideo(element, videoSrc, title, description, duration, posterSrc, youtubeEmbedUrl) {
+    const player = document.getElementById('mainMuseumPlayer');
+    const titleElem = document.getElementById('currentVideoTitle');
+    const descElem = document.getElementById('currentVideoDesc');
+    const durationElem = document.getElementById('currentVideoDuration');
+
+    if (player) {
+        if (youtubeEmbedUrl) {
+            player.outerHTML = '<iframe id="mainMuseumPlayer" class="w-full h-full" src="' + youtubeEmbedUrl + '" title="' + title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        } else {
+            player.src = videoSrc || '';
+            player.poster = posterSrc || 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80';
+            player.load();
+            if (videoSrc) {
+                player.play().catch(() => {});
+            }
+        }
+    }
+
+    if (titleElem) titleElem.innerText = title || 'Judul belum tersedia';
+    if (descElem) descElem.innerText = description || 'Deskripsi belum tersedia';
+    if (durationElem) durationElem.innerText = duration || '00:00';
+
+    const allPlaylistItems = element.parentElement.children;
+    Array.from(allPlaylistItems).forEach((item) => {
+        item.classList.remove('bg-amber-50/70', 'border-amber-600');
+        item.classList.add('border-transparent');
+
+        const itemTitle = item.querySelector('h4');
+        if (itemTitle) {
+            itemTitle.classList.remove('font-bold', 'text-amber-900');
+            itemTitle.classList.add('font-semibold', 'text-stone-800');
+        }
+
+        const badgeContainer = item.querySelector('.aspect-video > div');
+        if (badgeContainer) {
+            badgeContainer.innerHTML = '<span class="text-amber-400 text-xs">▶️</span>';
+        }
+    });
+
+    element.classList.add('bg-amber-50/70', 'border-amber-600');
+    element.classList.remove('border-transparent');
+
+    const activeTitle = element.querySelector('h4');
+    if (activeTitle) {
+        activeTitle.classList.remove('font-semibold', 'text-stone-800');
+        activeTitle.classList.add('font-bold', 'text-amber-900');
+    }
+
+    const activeBadge = element.querySelector('.aspect-video > div');
+    if (activeBadge) {
+        activeBadge.innerHTML = '<span class="text-amber-400 text-xs">▶️ Aktif</span>';
+    }
+}
+
 </script>
