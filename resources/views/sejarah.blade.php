@@ -85,13 +85,27 @@
     </header>
 
 <!-- 2. KONTEN UTAMA: HALAMAN SEJARAH DINAMIS -->
+<div class="w-full mb-16 overflow-hidden aspect-[3/1] md:aspect-[21/9] lg:aspect-[3.5/1] bg-stone-900 shadow-sm">
+    
+    <!-- Gambar Latar Belakang Dinamis Khusus Halaman Sejarah -->
+    <!-- 🔴 Mengambil data khusus array key 'sejarah' -->
+    @if(isset($banners) && isset($banners['sejarah']))
+        <img src="{{ asset('storage/' . $banners['sejarah']) }}" 
+             alt="Header Banner Sejarah" 
+             class="w-full h-full object-cover">
+    @else
+        <!-- Gambar Default bertema teks/manuskrip/arsip sejarah lama jika admin belum upload -->
+        <img src="https://unsplash.com" 
+             alt="Default Banner Sejarah" 
+             class="w-full h-full object-cover opacity-80">
+    @endif
+
+</div>
+
 <main class="flex-grow max-w-4xl w-full mx-auto px-6 py-12 bg-[#fdfbf2] font-sans">
     
     <!-- Bagian Judul dan Abstrak Sejarah -->
     <div class="text-center mb-12 flex flex-col items-center" data-aos="fade-down" data-aos-duration="800">
-        <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-bold tracking-wider px-4 py-1.5 rounded-full mb-4 uppercase">
-            Profil Museum
-        </span>
         <h1 class="text-3xl md:text-5xl font-black text-amber-800 tracking-tight leading-tight">
             {{ $sejarahData['sejarah_title'] ?? 'Sejarah Kerajaan Talaga Manggung' }}
         </h1>

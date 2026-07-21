@@ -107,16 +107,15 @@ class HalamanController extends Controller
         return view('visimisi', compact('visimisiData'));
     }
 
-    public function strukturorg()
-    {
-        $positions = Position::query()
-            ->with(['parent', 'children' => fn ($query) => $query->orderBy('name')])
-            ->whereNull('parent_id')
-            ->orderBy('name')
-            ->get();
+public function strukturorg()
+{
+    // KOREKSI UTAMA: Ambil data tunggal bermerek 'Global' dari database
+    $struktur = Position::where('title', 'Global')->first();
 
-        return view('strukturorg', compact('positions'));
-    }
+    // Lempar variabel $struktur ke dalam file Blade publik Anda
+    return view('strukturorg', compact('struktur'));
+}
+
 
     public function walangsuji()
     {

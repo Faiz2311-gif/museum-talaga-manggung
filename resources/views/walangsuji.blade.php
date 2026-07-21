@@ -85,6 +85,23 @@
     </header>
 
     <!-- 2. KONTEN UTAMA -->
+<!-- Bagian Banner Latar Belakang Sepanjang Lebar Web Khusus Walang Suji -->
+<div class="w-full mb-16 overflow-hidden aspect-[3/1] md:aspect-[21/9] lg:aspect-[3.5/1] bg-stone-900 shadow-sm">
+    
+    <!-- Gambar Latar Belakang Dinamis Khusus Halaman Walang Suji -->
+    <!-- 🔴 Mengambil data khusus array key 'walangsuji' -->
+    @if(isset($banners) && isset($banners['walangsuji']))
+        <img src="{{ asset('storage/' . $banners['walangsuji']) }}" 
+             alt="Header Banner Walang Suji" 
+             class="w-full h-full object-cover">
+    @else
+        <!-- Gambar Default bertema ornamen tradisional, alam, atau kain/budaya hijau jika admin belum unggah kustom -->
+        <img src="https://unsplash.com" 
+             alt="Default Banner Walang Suji" 
+             class="w-full h-full object-cover opacity-80">
+    @endif
+
+</div>
 
 <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 bg-[#fdfbf2]">
     

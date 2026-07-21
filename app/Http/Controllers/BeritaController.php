@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -147,4 +148,28 @@ class BeritaController extends Controller
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus!');
     }
+
+    public function updateHeader(Request $request)
+    {
+        $request->validate([
+            'header_galeri' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+        ]);
+
+        $setting = Setting::first() ?? new Setting();
+
+        if ($request->hasFile('header_galeri')) {
+            if ($setting->header_galeri && Storage::disk('public')->exists($setting->header_galeri)) {
+                Storage::disk('public')->delete($setting->header_galeri);
+            }
+
+            $path = $request->file('header_galeri')->store('headers', 'public');
+            $setting->header_galeri = $path;
+        }
+
+        $setting->save();
+
+        return redirect()->back()->with('success_header', 'Banner header galeri berhasil diperbarui!');
+    }
 }
+
+

@@ -11,7 +11,7 @@ use App\Http\Controllers\HomeCardController;
 use App\Http\Controllers\WalangSujiController;
 use App\Http\Controllers\GosaliVideoController;
 use App\Http\Controllers\FooterController;
-use App\Livewire\OrganizationManager;
+use App\Http\Controllers\StrukturOrgController;
 
 
 // Halaman Utama Publik
@@ -85,13 +85,16 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     });
 
     // 6. Mengarah ke views/admin/admstog.blade.php (Halaman Struktur Organisasi Admin)
-    Route::get('strukturorg', function () {
-        return view('admin.strukturorg.index');
-    })->middleware(['verified'])->name('admin.strukturorg');
+    // Rute konvensional (jika Anda masih ingin memanggil via view index biasa)
+// 1. Rute untuk MENAMPILKAN halaman admin struktur organisasi
+Route::get('strukturorg', [StrukturOrgController::class, 'index'])
+    ->middleware(['auth', 'verified']) // Disarankan ditambah middleware 'auth' untuk keamanan panel admin
+    ->name('admin.strukturorg.index');
 
-    Route::get('strukturorg/livewire', OrganizationManager::class)
-        ->middleware(['verified'])
-        ->name('admin.strukturorg.livewire');
+// 2. Rute untuk PROSES MENYIMPAN data gambar & deskripsi (Solusi Eror Route Not Found)
+Route::put('strukturorg/update', [StrukturOrgController::class, 'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('admin.strukturorg.update'); 
 
     // 7. Mengarah ke views/admin/admgaleri.blade.php (Halaman Galeri Admin)
     Route::get('galeri-admin', [App\Http\Controllers\GaleriController::class, 'adminIndex'])
@@ -110,6 +113,11 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
             'destroy' => 'admin.galeri.destroy',
         ])
         ->middleware(['auth', 'verified']);
+    // Tambahkan rute ini untuk memproses submit form dari Editor Header
+    Route::put('galeri-admin/update-header', [App\Http\Controllers\GaleriController::class, 'updateHeader'])
+    ->name('admin.setting.update-header')
+    ->middleware(['auth', 'verified']);
+
 
     // Mengarah ke Controller untuk menangani tampilan tabel CRUD berita admin
     Route::get('berita-admin', [App\Http\Controllers\BeritaController::class, 'adminIndex'])

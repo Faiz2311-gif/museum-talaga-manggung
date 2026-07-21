@@ -20,7 +20,7 @@
         <div class="min-h-screen bg-[#fdfbf2]">
             <livewire:layout.navigation />
 
-            <div id="adminMainContent" class="pl-64 transition-all duration-300">
+            <div id="adminMainContent" class="pt-16 pl-0 transition-all duration-300 ease-in-out lg:pt-0 lg:pl-64">
                 
                 <!-- Page Heading (Opsional, sudah dibersihkan dari warna gelap bawaan) -->
                 @if (isset($header))

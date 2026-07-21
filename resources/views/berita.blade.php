@@ -85,19 +85,26 @@
     </header>
 
     <!-- 2. KONTEN UTAMA HALAMAN BERITA -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12">
+    
     <!-- Header Halaman -->
-    <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
-        <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-medium px-4 py-1.5 rounded-full mb-6 font-sans">
-            Kabar & Publikasi Instansi
-        </span>
-        <h1 class="text-4xl md:text-5xl font-black text-amber-700 tracking-tight leading-[1.15] mb-4">
-            Kabar & Rilis Berita Museum
-        </h1>
-        <p class="font-sans text-sm text-stone-600 leading-relaxed max-w-xl">
-            Ikuti perkembangan terbaru mengenai konservasi artefak, temuan arsip sejarah, dan agenda kebudayaan di Museum Talaga Manggung.
-        </p>
-    </div>
+    <div class="w-full mb-16 overflow-hidden aspect-[3/1] md:aspect-[21/9] lg:aspect-[3.5/1] bg-stone-900 shadow-sm">
+    
+    <!-- Gambar Latar Belakang Dinamis Khusus Halaman Berita -->
+    @if(isset($banners) && isset($banners['berita']))
+        <img src="{{ asset('storage/' . $banners['berita']) }}" 
+             alt="Header Banner Berita" 
+             class="w-full h-full object-cover">
+    @else
+        <!-- Koreksi Gambar Default: Menggunakan file gambar asli khusus tema berita/koran/media -->
+        <img src="https://unsplash.com" 
+             alt="Default Banner Berita" 
+             class="w-full h-full object-cover opacity-80">
+    @endif
+
+</div>
+
+ <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12">
+
 
     <!-- Komponen Search, Filter & Sortir Berita -->
 <div class="mb-10 bg-white border border-amber-200/60 p-6 rounded-2xl shadow-sm">

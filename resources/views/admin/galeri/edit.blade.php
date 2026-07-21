@@ -7,7 +7,7 @@
                     ← Kembali ke Manajemen Katalog
                 </a>
                 <h1 class="text-2xl font-black text-amber-700 tracking-tight mt-3">
-                    Edit Aset: {{ $galeri->judul }}
+                    Edit Katalog
                 </h1>
             </div>
 
@@ -18,13 +18,13 @@
 
                     <!-- Nama Objek -->
                     <div>
-                        <label for="judul" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Nama Artefak / Kegiatan</label>
+                        <label for="judul" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Nama Katalog</label>
                         <input type="text" name="judul" id="judul" value="{{ old('judul', $galeri->judul) }}" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40">
                         @error('judul') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <!-- Klasifikasi Kategori -->
-                    <div>
+                    {{-- <div>
                         <label for="kategori" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Klasifikasi Kategori</label>
                         <select name="kategori" id="kategori" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40">
                             @foreach(['Arca Perunggu', 'Terracotta', 'Perlengkapan Ritual', 'Senjata Tradisional', 'Senjata Berpeledak', 'Pakaian Perlengkapan Perang', 'Etnografika', 'Keramokologika', 'Numismatika'] as $kat)
@@ -32,21 +32,21 @@
                             @endforeach
                         </select>
                         @error('kategori') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
-                    </div>
+                    </div> --}}
 
                     <!-- Link Model 3D -->
                     <div>
-                        <label for="link_3d" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Tautan Integasi Objek 3D (Opsional)</label>
+                        <label for="link_3d" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Tautan Integasi Katalog</label>
                         <input type="url" name="link_3d" id="link_3d" value="{{ old('link_3d', $galeri->link_3d) }}" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40">
                         @error('link_3d') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <!-- Deskripsi -->
-                    <div>
+                    {{-- <div>
                         <label for="deskripsi" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Konteks Sejarah / Deskripsi Ringkas</label>
                         <textarea name="deskripsi" id="deskripsi" rows="4" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40">{{ old('deskripsi', $galeri->deskripsi) }}</textarea>
                         @error('deskripsi') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
-                    </div>
+                    </div> --}}
 
                     <!-- Foto Media Saat Ini & Input File Baru -->
                     <div>

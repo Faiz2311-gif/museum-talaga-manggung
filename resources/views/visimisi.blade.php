@@ -89,13 +89,26 @@
 
     <!-- 2. KONTEN UTAMA: GALERI (Gaya Google Images) -->
     <!-- PERBAIKAN: Mengubah background utama menjadi warna krem hangat (#fdfbf2) -->
+    <div class="w-full mb-16 overflow-hidden aspect-[3/1] md:aspect-[21/9] lg:aspect-[3.5/1] bg-stone-900 shadow-sm">
+    
+    <!-- Gambar Latar Belakang Dinamis Khusus Halaman Visi Misi -->
+    <!-- 🔴 Mengambil data khusus array key 'visimisi' -->
+    @if(isset($banners) && isset($banners['visimisi']))
+        <img src="{{ asset('storage/' . $banners['visimisi']) }}" 
+             alt="Header Banner Visi Misi" 
+             class="w-full h-full object-cover">
+    @else
+        <!-- Gambar Default bertema arsitektur/gedung museum/ruang formal jika admin belum unggah gambar kustom -->
+        <img src="https://unsplash.com" 
+             alt="Default Banner Visi Misi" 
+             class="w-full h-full object-cover opacity-80">
+    @endif
+
+</div>
 <main class="flex-grow max-w-4xl w-full mx-auto px-6 py-12 bg-[#fdfbf2] font-sans">
     
     <!-- Bagian Judul dan Abstrak Visi Misi -->
     <div class="text-center mb-12 flex flex-col items-center" data-aos="fade-down" data-aos-duration="800">
-        <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-bold tracking-wider px-4 py-1.5 rounded-full mb-4 uppercase">
-            Arah & Komitmen
-        </span>
         <h1 class="text-3xl md:text-5xl font-black text-amber-800 tracking-tight leading-tight">
             {{ $visimisiData['visimisi_title'] ?? 'Visi & Misi Institut' }}
         </h1>

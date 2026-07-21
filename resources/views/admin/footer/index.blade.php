@@ -16,7 +16,7 @@
                 @csrf
 
                 <div class="rounded-2xl border border-amber-200 bg-white p-6 shadow-sm">
-                    <h2 class="text-lg font-bold text-stone-800">Kolom 1 - Informasi Instansi</h2>
+                    <h2 class="text-lg font-bold text-stone-800">Kolom 1</h2>
                     <div class="mt-4 grid gap-4 md:grid-cols-2">
                         <div>
                             <label class="mb-1 block text-sm font-semibold text-stone-700">Judul</label>
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="rounded-2xl border border-amber-200 bg-white p-6 shadow-sm">
-                    <h2 class="text-lg font-bold text-stone-800">Kolom 2 - Akses Pintasan</h2>
+                    <h2 class="text-lg font-bold text-stone-800">Kolom 2</h2>
                     <div class="mt-4 space-y-4">
                         <div>
                             <label class="mb-1 block text-sm font-semibold text-stone-700">Judul</label>
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="rounded-2xl border border-amber-200 bg-white p-6 shadow-sm">
-                    <h2 class="text-lg font-bold text-stone-800">Kolom 3 - Informasi Hukum</h2>
+                    <h2 class="text-lg font-bold text-stone-800">Kolom 3</h2>
                     <div class="mt-4 space-y-4">
                         <div>
                             <label class="mb-1 block text-sm font-semibold text-stone-700">Judul</label>

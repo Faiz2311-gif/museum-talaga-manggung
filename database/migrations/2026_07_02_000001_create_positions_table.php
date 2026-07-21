@@ -13,10 +13,24 @@ return new class extends Migration
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('role');
-            $table->foreignId('parent_id')->nullable()->constrained('positions')->nullOnDelete();
+            $table->string('title');                 // Nama Jabatan (misal: Direktur Utama)
+            $table->string('role');                  // Nama Pejabat (misal: Ahmad Subarjo)
+            $table->string('image')->nullable();     // Foto Pejabat (1 gambar)
+            $table->text('description')->nullable(); // Deskripsi Singkat Tugas/Tanggung Jawab
+            
+            // Tambahan: Kolom urutan untuk mengatur posisi tampilan kiri/kanan/atas/bawah di tingkat yang sama
+            $table->integer('sort_order')->default(0); 
+
+            // Koreksi keamanan: Pastikan tipe kolom sama dan mendukung null sebelum foreign key dipasang
+            $table->unsignedBigInteger('parent_id')->nullable();
+            
             $table->timestamps();
+
+            // Deklarasi Foreign Key untuk self-referencing (Atasan Langsung)
+            $table->foreign('parent_id')
+                  ->references('id')
+                  ->on('positions')
+                  ->nullOnDelete();
         });
     }
 

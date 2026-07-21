@@ -88,39 +88,89 @@
         </div>
     </header>
 
-    <!-- 2. KONTEN UTAMA -->
+ <!-- 2. KONTEN UTAMA -->
+
+<div class="w-full mb-16 overflow-hidden aspect-[3/1] md:aspect-[21/9] lg:aspect-[3.5/1] bg-stone-900 shadow-sm relative">
+    <!-- Gambar Latar Belakang Banner Halaman -->
+    @if(isset($banners) && isset($banners['strukturorg']))
+        <img src="{{ asset('storage/' . $banners['strukturorg']) }}" 
+             alt="Header Banner Struktur Organisasi" 
+             class="w-full h-full object-cover">
+    @else
+        <!-- Perbaikan: URL Gambar Default spesifik agar tidak terblokir CORB browser -->
+        <img src="https://unsplash.com" 
+             alt="Default Banner Struktur Organisasi" 
+             class="w-full h-full object-cover opacity-50">
+    @endif
+</div>
+
 <main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 bg-[#fdfbf2]">
     <div class="mx-auto max-w-6xl space-y-6">
-        <div class="rounded-3xl border border-amber-200 bg-white p-8 shadow-sm">
+        
+        <!-- Header Judul -->
+        {{-- <div class="rounded-3xl border border-amber-200 bg-white p-8 shadow-sm">
             <p class="mb-3 inline-flex rounded-full bg-amber-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-700">
                 Struktur Organisasi
             </p>
             <h1 class="text-3xl font-black tracking-tight text-stone-900">Susunan jabatan dan staf museum</h1>
             <p class="mt-3 max-w-3xl text-sm leading-6 text-stone-600">
-                Bagian ini menampilkan hirarki organisasi yang dikelola melalui panel admin, sehingga perubahan jabatan akan tampil langsung di halaman publik.
+                Halaman ini menampilkan bagan kepengurusan resmi museum serta penjelasan tupoksi masing-masing divisi.
             </p>
-        </div>
+        </div> --}}
 
-        <div class="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm">
-            @if ($positions->isEmpty())
-                <div class="rounded-2xl border border-dashed border-stone-300 bg-stone-50 p-8 text-center text-sm text-stone-600">
-                    Belum ada data struktur organisasi yang tersedia.
+        <!-- Bagian 1: Tampilan Gambar Bagan Struktur Organisasi -->
+        <div class="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm flex flex-col items-center">
+            <!-- PERBAIKAN: Mengubah $struktur->image_path menjadi $struktur->image sesuai kolom DB -->
+            @if(isset($struktur) && isset($struktur->image))
+                <div class="w-full bg-stone-50 rounded-2xl p-4 border border-stone-100 flex justify-center overflow-hidden">
+                    <img src="{{ asset('storage/' . $struktur->image) }}" 
+                         alt="Bagan Struktur Organisasi Museum" 
+                         onclick="openImageModal(this.src)"
+                         class="max-w-full h-auto rounded-xl shadow-sm hover:scale-[1.01] transition-transform duration-300 cursor-zoom-in">
                 </div>
+                <p class="text-[11px] text-stone-400 mt-3 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                    </svg>
+                    <span>Klik gambar untuk memperbesar resolusi bagan.</span>
+                </p>
             @else
-                <div class="space-y-5">
-                    @foreach ($positions as $position)
-                        @include('partials.public-org-node', ['position' => $position])
-                    @endforeach
+                <div class="w-full rounded-2xl border border-dashed border-stone-300 bg-stone-50 p-12 text-center text-sm text-stone-500">
+                    <svg class="mx-auto h-10 w-10 text-stone-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H2.25A1.5 1.5 0 00.75 6v12.75a1.5 1.5 0 001.5 1.5z" />
+                    </svg>
+                    Bagan gambar struktur organisasi belum diunggah oleh admin.
                 </div>
             @endif
         </div>
+
+        <!-- Bagian 2: Teks Deskripsi di Bawah Gambar -->
+        @if(isset($struktur) && isset($struktur->description))
+            <div class="rounded-3xl border border-amber-200 bg-white p-8 shadow-sm">
+                <h2 class="text-lg font-bold text-stone-900 border-b border-stone-100 pb-3 mb-4 flex items-center gap-2">
+                    <span>📝 Detail & Penjelasan Struktur</span>
+                </h2>
+                <div class="text-stone-700 text-sm leading-7 space-y-4 whitespace-pre-line">
+                    {!! e($struktur->description) !!}
+                </div>
+            </div>
+        @endif
+
     </div>
 </main>
 
+<!-- Wajib Ditambahkan: Modal Pop-up Ringan untuk Zoom Gambar -->
+<div id="imageZoomModal" class="fixed inset-0 z-50 hidden bg-stone-950/90 flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeImageModal()">
+    <button class="absolute top-6 right-6 text-white bg-white/10 p-2 rounded-full hover:bg-white/20 transition duration-150">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+    <img id="modalTargetImage" src="" alt="Zoomed Bagan" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl" onclick="event.stopPropagation()">
+</div>
 
-
+<x-site-footer/>
             <!-- Item Foto 3 -->
-<x-site-footer />
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -167,4 +217,14 @@ window.addEventListener('click', function() {
         menu.classList.remove('opacity-100', 'visible', 'translate-y-0');
     });
 });
+
+function openImageModal(src) {
+        document.getElementById('modalTargetImage').src = src;
+        document.getElementById('imageZoomModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Kunci scroll halaman belakang
+    }
+    function closeImageModal() {
+        document.getElementById('imageZoomModal').classList.add('hidden');
+        document.body.style.overflow = 'auto'; // Aktifkan kembali scroll
+    }
 </script>

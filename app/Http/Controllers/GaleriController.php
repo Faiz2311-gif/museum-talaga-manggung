@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Galeri;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +25,10 @@ class GaleriController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('galeri', compact('galeri', 'kataKunci', 'kategoriTerpilih'));
+        // Mengambil konfigurasi gambar banner dari database
+        $setting = Setting::first(); 
+
+        return view('galeri', compact('galeri', 'kataKunci', 'kategoriTerpilih', 'setting'));
     }
 
     public function show(Galeri $galeri)
@@ -47,7 +51,11 @@ class GaleriController extends Controller
     public function adminIndex()
     {
         $galeris = Galeri::orderBy('created_at', 'desc')->paginate(12);
-        return view('admin.galeri.index', compact('galeris'));
+        
+        // Mengambil konfigurasi banner agar tampil di Editor Header Admin
+        $setting = Setting::first();
+
+        return view('admin.galeri.index', compact('galeris', 'setting'));
     }
 
     // Form Tambah Foto Galeri
@@ -60,13 +68,12 @@ class GaleriController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-    'judul' => 'required|string|max:255',
-    'deskripsi' => 'nullable|string|max:1000',
-    'kategori' => 'required|string|max:100',
-    'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:3048',
-    'link_3d' => 'nullable|url', // <-- Validasi wajib berupa format link URL valid
-]);
-
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:1000',
+            'kategori' => 'required|string|max:100',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:3048',
+            'link_3d' => 'nullable|url',
+        ]);
 
         if ($request->hasFile('foto')) {
             $path = $request->file('foto')->store('galeri', 'public');
@@ -91,13 +98,12 @@ class GaleriController extends Controller
         $galeri = Galeri::findOrFail($id);
 
         $validated = $request->validate([
-    'judul' => 'required|string|max:255',
-    'deskripsi' => 'nullable|string|max:1000',
-    'kategori' => 'required|string|max:100',
-    'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:3048',
-    'link_3d' => 'nullable|url', // <-- Validasi wajib berupa format link URL valid
-]);
-
+            'judul' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string|max:1000',
+            'kategori' => 'required|string|max:100',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:3048',
+            'link_3d' => 'nullable|url',
+        ]);
 
         if ($request->hasFile('foto')) {
             if ($galeri->foto && Storage::disk('public')->exists($galeri->foto)) {
@@ -125,4 +131,31 @@ class GaleriController extends Controller
 
         return redirect()->route('admin.galeri.index')->with('success', 'Foto galeri berhasil dihapus!');
     }
+
+    // Pemrosesan Pengunggahan Gambar Banner / Header
+    public function updateHeader(Request $request)
+{
+    $request->validate([
+        'halaman' => 'required|string', // Menangkap info halaman mana yang di-update
+        'banner_image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+    ]);
+
+    // Cari data berdasarkan nama halaman (misal: 'galeri'), jika belum ada buat baru
+    $setting = Setting::where('halaman', $request->halaman)->first() ?? new Setting();
+    $setting->halaman = $request->halaman;
+
+    if ($request->hasFile('banner_image')) {
+        // Hapus banner lama khusus untuk halaman ini saja
+        if ($setting->banner_image && Storage::disk('public')->exists($setting->banner_image)) {
+            Storage::disk('public')->delete($setting->banner_image);
+        }
+
+        $path = $request->file('banner_image')->store('headers', 'public');
+        $setting->banner_image = $path;
+    }
+
+    $setting->save();
+
+    return redirect()->back()->with('success_header', 'Banner halaman ' . $request->halaman . ' berhasil diperbarui!');
+}
 }

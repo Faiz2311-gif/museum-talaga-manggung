@@ -85,93 +85,80 @@
     </header>
 
     <!-- 2. KONTEN UTAMA: GALERI (Gaya Google Images) -->
-    <!-- PERBAIKAN: Mengubah background utama menjadi warna krem hangat (#fdfbf2) -->
-<main class="flex-grow max-w-7xl w-full mx-auto px-6 py-12 bg-[#fffbeb]">
+    <!-- Bagian Banner Latar Belakang Header Saja -->
+<!-- Bagian Banner Latar Belakang Header Sepanjang Lebar Web -->
+<div class="w-full mb-16 overflow-hidden aspect-[3/1] md:aspect-[21/9] lg:aspect-[3.5/1] bg-stone-900 shadow-sm">
+    
+    <!-- Gambar Latar Belakang Dinamis Khusus Halaman Galeri -->
+    <!-- KOREKSI: Menggunakan variabel array global $banners dengan indeks 'galeri' -->
+    @if(isset($banners) && isset($banners['galeri']))
+        <img src="{{ asset('storage/' . $banners['galeri']) }}" 
+             alt="Header Banner Galeri" 
+             class="w-full h-full object-cover">
+    @else
+        <!-- KOREKSI: Menggunakan berkas gambar asli (.jpg) bertema museum/artefak bersejarah -->
+        <img src="https://unsplash.com" 
+             alt="Default Banner Galeri" 
+             class="w-full h-full object-cover opacity-80">
+    @endif
 
-    <!-- Bagian Judul dan Deskripsi -->
-    <div class="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center">
-        <span class="bg-amber-100/70 border border-amber-200 text-amber-800 text-[10px] md:text-xs font-medium px-4 py-1.5 rounded-full mb-6 font-sans">
-            Arsip & Dokumentasi Visual
-        </span>
-        <h1 class="text-4xl md:text-5xl font-black text-amber-700 tracking-tight leading-[1.15] mb-4">
-            Katalog Galeri
-        </h1>
-        <p class="font-sans text-sm text-stone-600 leading-relaxed max-w-xl">
-            Jajahi kumpulan arsip visual artefak, dokumentasi sejarah, dan runtunan kegiatan pelestarian budaya di Museum Talaga Manggung.
-        </p>
-    </div>
+</div>
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 bg-[#fdfbf2]">
+    <!-- Grid Dua Kolom (Dinamis Berdasarkan Data Controller) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
 
-    <!-- Bilah Filter Kategori Dinamis -->
-    <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-10 scrollbar-none whitespace-nowrap">
-        <!-- Tombol Semua Kategori -->
-        <a href="{{ route('galeri') }}" 
-           class="px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 {{ !request('kategori') ? 'bg-amber-600 text-white shadow-md shadow-amber-600/10' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600' }}">
-            Semua Foto
-        </a>
+    @forelse($galeri as $item)
+        <!-- Item Kartu / Dua Kolom -->
+        <div class="flex flex-col sm:flex-row relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
+            
+            <!-- Pembungkus Gambar Thumbnail -->
+            <div class="overflow-hidden aspect-[4/3] sm:w-48 sm:h-full bg-stone-100 relative shrink-0">
+                <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
+            </div>
 
-        @foreach(['Arca Perunggu', 'Terracotta', 'Perlengkapan Ritual', 'Senjata Tradisional', 'Senjata Berpeledak', 'Pakaian Perlengkapan Perang', 'Etnografika', 'Keramokologika', 'Numismatika'] as $kat)
-            <a href="{{ route('galeri', ['kategori' => $kat]) }}" 
-               class="px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 {{ request('kategori') == $kat ? 'bg-amber-600 text-white shadow-md shadow-amber-600/10' : 'bg-white text-stone-600 border border-stone-200 hover:border-amber-500 hover:text-amber-600 hover:bg-amber-50/30' }}">
-                {{ $kat }}
-            </a>
-        @endforeach
-    </div>
+            <!-- Detail Konten -->
+            <div class="p-5 bg-white flex-grow flex flex-col justify-between gap-4">
+                <div>
+                    <!-- Hanya Menampilkan Judul / Title -->
+                    <h3 class="text-base font-bold text-stone-800 group-hover:text-amber-600 transition-colors line-clamp-2">{{ $item->judul }}</h3>
+                </div>
 
-    <!-- Grid Foto (Dinamis Berdasarkan Data Controller) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-
-        @forelse($galeri as $item)
-            <!-- Item Foto / Artefak -->
-            <div class="flex flex-col relative group bg-white border border-stone-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                
-                <!-- Pembungkus Gambar Thumbnail -->
-                <div class="overflow-hidden aspect-[4/3] bg-stone-100 relative">
-                    <img src="{{ asset('storage/' . $item->foto) }}" alt="{{ $item->judul }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out">
-                    
-                    <!-- Badge Indikator Konten 3D di Atas Gambar -->
+                <!-- Tombol Tautan Keluar / Website Lain -->
+                <div class="pt-2 border-t border-stone-100">
                     @if($item->link_3d)
-                        <span class="absolute top-3 right-3 bg-amber-600 text-white text-[10px] font-black px-2.5 py-1 rounded-md shadow-md uppercase tracking-wider animate-pulse">
-                            3D Model
-                        </span>
+                        <a href="{{ $item->link_3d }}" target="_blank" rel="noopener noreferrer" 
+                           class="w-full inline-flex items-center justify-center space-x-2 bg-stone-800 hover:bg-amber-700 text-white font-bold text-xs px-4 py-3 rounded-xl transition duration-200 shadow-sm">
+                            <span>Kunjungi</span>
+                            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V11.25m-18-6h6m0 0v6m0-6L10.5 10.5" />
+                            </svg>
+                        </a>
+                    @else
+                        <button disabled class="w-full inline-flex items-center justify-center space-x-2 bg-stone-100 text-stone-400 font-bold text-xs px-4 py-3 rounded-xl cursor-not-allowed border border-stone-200/50">
+                            <span>Tautan Tidak Tersedia</span>
+                        </button>
                     @endif
                 </div>
-
-                <!-- Detail Konten -->
-                <div class="p-4 bg-white flex-grow flex flex-col justify-between gap-4">
-                    <div>
-                        <p class="text-[10px] font-bold text-amber-600 uppercase tracking-wider">{{ $item->kategori }}</p>
-                        <h3 class="text-sm font-semibold text-stone-800 mt-1 group-hover:text-amber-600 transition-colors">{{ $item->judul }}</h3>
-                        @if($item->deskripsi)
-                            <p class="text-xs text-stone-500 mt-1 line-clamp-2">{{ $item->deskripsi }}</p>
-                        @endif
-                    </div>
-
-                    <div class="pt-2 border-t border-stone-100 flex flex-col gap-2">
-                        <a href="{{ route('galeri.show', $item) }}" class="w-full inline-flex items-center justify-center bg-stone-800 hover:bg-stone-900 text-white font-bold text-xs px-3 py-2.5 rounded-xl transition duration-200">
-                            Lihat Detail
-                        </a>
-
-                        @if($item->link_3d)
-                            <a href="{{ $item->link_3d }}" target="_blank" rel="noopener noreferrer" 
-                               class="w-full inline-flex items-center justify-center space-x-2 bg-amber-700 hover:bg-amber-800 text-white font-bold text-xs px-3 py-2.5 rounded-xl transition duration-200 shadow-sm">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-3-3M21 7.5l-3 3M21 7.5H8.25m0 0l3 3m-3-3l3-3M3 12h.008v.008H3V12zm0 4.5h.008v.008H3v-.008zm0-9h.008v.008H3V7.5z" />
-                                </svg>
-                                <span>Lihat Artefak 3D</span>
-                            </a>
-                        @endif
-                    </div>
-                </div>
             </div>
-        @empty
-            <!-- State Jika Data Kosong -->
-            <div class="col-span-full py-16 text-center text-stone-400 text-sm italic">
-                Belum ada dokumentasi foto atau artefak untuk kategori ini.
-            </div>
-        @endforelse
+        </div>
+    @empty
+        <!-- State Jika Data Kosong -->
+        <div class="col-span-full py-16 text-center text-stone-400 text-sm italic">
+            Katalog galeri masih kosong. Silakan unggah berkas foto artefak pertama Anda.
+        </div>
+    @endforelse
 
-    </div>
+</div>
+
+<!-- Pagination Links -->
+@if(method_exists($galeri, 'links'))
+<div class="mt-6">
+    {{ $galeri->links() }}
+</div>
+@endif
+
 </main>
+
 
 
 

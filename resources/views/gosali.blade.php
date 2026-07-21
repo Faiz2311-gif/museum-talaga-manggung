@@ -86,6 +86,26 @@
 
     <!-- 2. KONTEN UTAMA: GALERI (Gaya Google Images) -->
     <!-- PERBAIKAN: Mengubah background utama menjadi warna krem hangat (#fdfbf2) -->
+
+<!-- Bagian Banner Latar Belakang Sepanjang Lebar Web Khusus Gosali -->
+<div class="w-full mb-16 overflow-hidden aspect-[3/1] md:aspect-[21/9] lg:aspect-[3.5/1] bg-stone-900 shadow-sm">
+    
+    <!-- Gambar Latar Belakang Dinamis Khusus Halaman Gosali -->
+    <!-- 🔴 Mengambil data khusus array key 'gosali' -->
+    @if(isset($banners) && isset($banners['gosali']))
+        <img src="{{ asset('storage/' . $banners['gosali']) }}" 
+             alt="Header Banner Gosali" 
+             class="w-full h-full object-cover">
+    @else
+        <!-- Gambar Default bertema tempaan logam, api, kerajinan senjata tradisional besi/baja jika admin belum unggah kustom -->
+        <img src="https://unsplash.com" 
+             alt="Default Banner Gosali" 
+             class="w-full h-full object-cover opacity-80">
+    @endif
+
+</div>
+
+
 <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 bg-[#fdfbf2]">
     <div class="mb-8">
         <span class="text-xs font-bold tracking-widest text-amber-700 uppercase block mb-1">Living Museum</span>
