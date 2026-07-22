@@ -104,7 +104,7 @@
 </div>
 
 
-            <!-- Kotak Utama Tabel -->
+             <!-- Kotak Utama Tabel -->
             <div data-aos="fade-up" data-aos-duration="1000" class="bg-white border border-amber-200/60 rounded-2xl overflow-hidden shadow-sm">
                 
                 <div class="overflow-x-auto">
@@ -112,9 +112,9 @@
                         <thead class="bg-amber-50 border-b border-amber-200">
                             <tr>
                                 <th class="px-6 py-4 text-left text-xs font-bold text-amber-900 uppercase tracking-wider">Media</th>
-                                <th class="px-6 py-4 text-left text-xs font-bold text-amber-900 uppercase tracking-wider">title Katalog</th>
-                                {{-- <th class="px-6 py-4 text-left text-xs font-bold text-amber-900 uppercase tracking-wider hidden md:table-cell">Kategori</th> --}}
-                                <th class="px-6 py-4 text-center text-xs font-bold text-amber-900 uppercase tracking-wider hidden md:table-cell">Tautan</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-amber-900 uppercase tracking-wider">Informasi Aset / Artefak</th>
+                                <th class="px-6 py-4 text-left text-xs font-bold text-amber-900 uppercase tracking-wider hidden md:table-cell">Kategori</th>
+                                <th class="px-6 py-4 text-center text-xs font-bold text-amber-900 uppercase tracking-wider hidden md:table-cell">Fitur 3D</th>
                                 <th class="px-6 py-4 text-right text-xs font-bold text-amber-900 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
@@ -126,17 +126,17 @@
                                 </td>
                                 <td class="px-6 py-4">
                                     <div class="font-bold text-stone-800 line-clamp-1">{{ $item->judul }}</div>
-                                    {{-- <div class="text-xs text-stone-500 mt-1 line-clamp-1">{{ $item->deskripsi ?? 'Tidak ada deskripsi.' }}</div> --}}
+                                    <div class="text-xs text-stone-500 mt-1 line-clamp-1">{{ $item->deskripsi ?? 'Tidak ada deskripsi.' }}</div>
                                 </td>
-                                {{-- <td class="px-6 py-4 hidden md:table-cell">
-                                   <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
+                                <td class="px-6 py-4 hidden md:table-cell">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800">
                                         {{ $item->kategori }}
-                                    </span> 
-                                </td> --}}
+                                    </span>
+                                </td>
                                 <td class="px-6 py-4 hidden md:table-cell text-center">
                                     @if($item->link_3d)
                                         <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border border-amber-200">
-                                            Tersimpan
+                                            Aktif 3D
                                         </span>
                                     @else
                                         <span class="text-stone-400 text-xs">-</span>

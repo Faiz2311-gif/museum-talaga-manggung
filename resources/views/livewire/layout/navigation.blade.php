@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use function Livewire\Volt\action;
 use Illuminate\Support\Str;
 
 $logout = function (Logout $logout) {
@@ -230,11 +231,21 @@ $logout = function (Logout $logout) {
                         {{ __('Pengaturan Profil') }}
                     </a>
 
-                    <button type="button" wire:click="logout" @click="profileOpen = false; $dispatch('sidebar-close')" class="w-full border-t border-stone-100 text-start">
-                        <span class="block px-4 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50">
-                            {{ __('Log Out') }}
-                        </span>
-                    </button>
+<form method="POST" action="{{ route('logout') }}" x-ref="logoutForm" class="w-full border-t border-stone-100">
+    @csrf
+    <button 
+        type="button" 
+        @click="profileOpen = false; $dispatch('sidebar-close'); $refs.logoutForm.submit()" 
+        class="w-full text-start"
+    >
+        <!-- PERBAIKAN CLASS TAILWIND PADA KELAS HOVER DAN TEXT -->
+        <x-dropdown-link class="text-red-600 hover:bg-red-600 hover:text-white font-medium py-2.5 transition-colors duration-150">
+            {{ __('Log Out') }}
+        </x-dropdown-link>
+    </button>
+</form>
+
+
                 </div>
             </div>
         </div>

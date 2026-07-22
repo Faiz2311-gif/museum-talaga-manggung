@@ -7,7 +7,7 @@
                     ← Kembali ke Manajemen Katalog
                 </a>
                 <h1 class="text-2xl font-black text-amber-700 tracking-tight mt-3">
-                    Unggah Katalog Baru
+                    Unggah Aset Galeri & Artefak Baru
                 </h1>
             </div>
 
@@ -17,13 +17,13 @@
 
                     <!-- Nama Objek / Judul -->
                     <div>
-                        <label for="judul" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Nama Katalog</label>
+                        <label for="judul" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Nama Artefak / Kegiatan</label>
                         <input type="text" name="judul" id="judul" value="{{ old('judul') }}" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40" placeholder="Contoh: Keris Pusaka Sanghyang Lutung...">
                         @error('judul') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <!-- Kategori Klasifikasi -->
-                    {{-- <div>
+                    <div>
                         <label for="kategori" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Klasifikasi Kategori</label>
                         <select name="kategori" id="kategori" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40">
                             <option value="" disabled selected>Pilih Klasifikasi...</option>
@@ -38,22 +38,22 @@
                             <option value="Numismatika" {{ old('kategori') == 'Numismatika' ? 'selected' : '' }}>Numismatika</option>
                         </select>
                         @error('kategori') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
-                    </div> --}}
+                    </div>
 
-                    <!-- Link Katalog -->
+                    <!-- Link Model Integrasi 3D (Opsional) -->
                     <div>
-                        <label for="link_3d" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Tautan Integasi Katalog</label>
+                        <label for="link_3d" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Tautan Integasi Objek 3D (Opsional)</label>
                         <input type="url" name="link_3d" id="link_3d" value="{{ old('link_3d') }}" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40" placeholder="https://sketchfab.com">
-                        <p class="text-[11px] text-stone-400 mt-1">Masukkan URL sematan eksternal</p>
+                        <p class="text-[11px] text-stone-400 mt-1">Masukkan URL sematan eksternal jika barang peninggalan ini mendukung visualisasi model 3 dimensi.</p>
                         @error('link_3d') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
                     </div>
 
                     <!-- Keterangan / Deskripsi -->
-                    {{-- <div>
+                    <div>
                         <label for="deskripsi" class="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-2">Konteks Sejarah / Deskripsi Ringkas</label>
                         <textarea name="deskripsi" id="deskripsi" rows="4" class="w-full border border-stone-200 rounded-xl px-4 py-2.5 text-sm focus:border-amber-500 focus:ring-amber-500 bg-stone-50/40" placeholder="Tuliskan latar belakang sejarah, tahun penemuan, atau keterangan dokumentasi acara...">{{ old('deskripsi') }}</textarea>
                         @error('deskripsi') <p class="text-xs text-red-600 mt-1">{{ $message }}</p> @enderror
-                    </div> --}}
+                    </div>
 
                     <!-- Upload Foto Pendukung -->
                     <div>
